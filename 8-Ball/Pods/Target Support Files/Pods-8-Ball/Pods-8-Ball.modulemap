@@ -1,0 +1,6 @@
+framework module Pods_8_Ball {
+  umbrella header "Pods-8-Ball-umbrella.h"
+
+  export *
+  module * { export * }
+}

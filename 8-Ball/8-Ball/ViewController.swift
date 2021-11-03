@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 let keyToAnwers = "keyToAnwers"
 
