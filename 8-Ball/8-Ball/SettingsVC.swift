@@ -15,18 +15,11 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var inputTextField: UITextField!
     
     private var answers = [String]()
-    private var dbService = DBService()
+    private var dbService: DBService!
     
-//    func setD(_ dbService: DBService) {
-//        self.dbService = dbService
-//    }
-//
-//    private func saveUserAnswers(array: [String]) {
-//        dbService.saveUserAnswers(array: answers)
-//    }
-//    private func getUserAnswers() -> [String] {
-//        dbService.getUserAnswers()
-//}
+    func setDbService(_ value: DBService) {
+        self.dbService = value
+    }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         if let answer = inputTextField.text, !answer.isEmpty {

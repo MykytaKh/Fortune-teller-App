@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol AnswerManagerProtocol {
     func fetchAnswer(success: @escaping (String) -> (), failure: @escaping () -> ())

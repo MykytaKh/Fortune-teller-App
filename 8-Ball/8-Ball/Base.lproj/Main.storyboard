@@ -11,7 +11,7 @@
         <!--SettingsVC-->
         <scene sceneID="4qa-15-DjZ">
             <objects>
-                <viewController id="uAh-QH-QYs" customClass="SettingsVC" customModule="__Ball" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Settings" id="uAh-QH-QYs" customClass="SettingsVC" customModule="__Ball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T2g-SP-Tgv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
