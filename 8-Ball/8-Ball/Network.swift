@@ -16,9 +16,9 @@ class Network: NetworkProtocol {
     private let urlString: String
     private let urlSession: URLSession
     
-    init() {
+    init(urlSession: URLSession = URLSession.shared) {
         self.urlString = "https://8ball.delegator.com/magic/JSON/question_string"
-        self.urlSession = URLSession.shared
+        self.urlSession = urlSession
     }
     
     func fetchResponse(success: @escaping (String) -> (), failure: @escaping () -> ()) {

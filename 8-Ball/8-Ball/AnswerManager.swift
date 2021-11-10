@@ -13,8 +13,6 @@ protocol AnswerManagerProtocol {
 
 class AnswerManager: AnswerManagerProtocol {
     
-    private let networkService: Network
-    private let dbService: DBService
     private let defaultAnswers = ["It is certain",
                                   "It is decidedly so",
                                   "Without a doubt",
@@ -36,10 +34,12 @@ class AnswerManager: AnswerManagerProtocol {
                                   "Outlook not so good",
                                   "Very doubtful"]
     private var userAnswers = [String]()
+    private let networkService: NetworkProtocol
+    private let dbService: DBServiceProtocol
     
-    init() {
-        self.networkService = Network()
-        self.dbService = DBService()
+    init(networkService: NetworkProtocol = Network(), dbService: DBServiceProtocol = DBService()) {
+        self.networkService = networkService
+        self.dbService = dbService
     }
     
     func fetchAnswer(success: @escaping (String) -> (), failure: @escaping () -> ()) {

@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     
-    private let answerManager = AnswerManager()
+    private let answerManager = AnswerManager(networkService: Network(), dbService: DBService())
     
     override func viewDidLoad() {
         super.viewDidLoad()
