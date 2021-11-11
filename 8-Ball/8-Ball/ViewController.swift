@@ -11,6 +11,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     
+    private var answerManager: AnswerManager!
+    
+    func setAnswerManager(_ value: AnswerManager) {
+        self.answerManager = value
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         messageLabel.text = "Ask any question and Shake me!"
@@ -22,7 +28,6 @@ class ViewController: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            let answerManager = AnswerManager(networkService: Network(), dbService: DBService())
             answerManager.fetchAnswer { [weak self] answer in
                 DispatchQueue.main.async {
                     self?.messageLabel.text = answer
