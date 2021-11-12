@@ -11,6 +11,8 @@
 		6C05E464273A8F260040BB0B /* AnswerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05E463273A8F260040BB0B /* AnswerManager.swift */; };
 		6C05E466273A8F8A0040BB0B /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05E465273A8F8A0040BB0B /* DBService.swift */; };
 		6C0BD7E7271F26F900D2F586 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0BD7E6271F26F900D2F586 /* SettingsVC.swift */; };
+		6C375729273F069800B73777 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6C375728273F069800B73777 /* swiftgen.yml */; };
+		6C37572C273F0AD700B73777 /* Generated in Resources */ = {isa = PBXBuildFile; fileRef = 6C37572B273F0AD700B73777 /* Generated */; };
 		6C9A9E13271DCF85007E5DAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9E12271DCF85007E5DAA /* AppDelegate.swift */; };
 		6C9A9E15271DCF85007E5DAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9E14271DCF85007E5DAA /* SceneDelegate.swift */; };
 		6C9A9E17271DCF85007E5DAA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9E16271DCF85007E5DAA /* MainViewController.swift */; };
@@ -26,6 +28,8 @@
 		6C05E463273A8F260040BB0B /* AnswerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerManager.swift; sourceTree = "<group>"; };
 		6C05E465273A8F8A0040BB0B /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		6C0BD7E6271F26F900D2F586 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		6C375728273F069800B73777 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		6C37572B273F0AD700B73777 /* Generated */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Generated; sourceTree = "<group>"; };
 		6C9A9E0F271DCF85007E5DAA /* 8-Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "8-Ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C9A9E12271DCF85007E5DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C9A9E14271DCF85007E5DAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,7 @@
 		6C9A9E06271DCF85007E5DAA = {
 			isa = PBXGroup;
 			children = (
+				6C375728273F069800B73777 /* swiftgen.yml */,
 				6C9A9E11271DCF85007E5DAA /* 8-Ball */,
 				6C9A9E10271DCF85007E5DAA /* Products */,
 				B0657BD30E9533EC5A1A0B62 /* Pods */,
@@ -82,6 +87,7 @@
 				6C9A9E1B271DCF86007E5DAA /* Assets.xcassets */,
 				6C9A9E1D271DCF86007E5DAA /* LaunchScreen.storyboard */,
 				6C9A9E20271DCF86007E5DAA /* Info.plist */,
+				6C37572B273F0AD700B73777 /* Generated */,
 			);
 			path = "8-Ball";
 			sourceTree = "<group>";
@@ -111,10 +117,12 @@
 			buildConfigurationList = 6C9A9E23271DCF86007E5DAA /* Build configuration list for PBXNativeTarget "8-Ball" */;
 			buildPhases = (
 				798D5D0D2CF4727A88EA7A6F /* [CP] Check Pods Manifest.lock */,
+				6C37572A273F0A1000B73777 /* SwiftGen */,
+				6C3D5A60273E80CA00EC15A8 /* SwiftLint */,
 				6C9A9E0B271DCF85007E5DAA /* Sources */,
 				6C9A9E0C271DCF85007E5DAA /* Frameworks */,
 				6C9A9E0D271DCF85007E5DAA /* Resources */,
-				702FF6817D986FEAB932ACD0 /* [CP] Embed Pods Frameworks */,
+				F4E2E7AFA59A25DBAC050D77 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -164,30 +172,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C9A9E1F271DCF86007E5DAA /* LaunchScreen.storyboard in Resources */,
+				6C37572C273F0AD700B73777 /* Generated in Resources */,
 				6C9A9E1C271DCF86007E5DAA /* Assets.xcassets in Resources */,
 				6C9A9E1A271DCF85007E5DAA /* Main.storyboard in Resources */,
+				6C375729273F069800B73777 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		702FF6817D986FEAB932ACD0 /* [CP] Embed Pods Frameworks */ = {
+		6C37572A273F0A1000B73777 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-8-Ball/Pods-8-Ball-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
+			name = SwiftGen;
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-8-Ball/Pods-8-Ball-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-8-Ball/Pods-8-Ball-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi \n";
+		};
+		6C3D5A60273E80CA00EC15A8 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		798D5D0D2CF4727A88EA7A6F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -209,6 +238,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4E2E7AFA59A25DBAC050D77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-8-Ball/Pods-8-Ball-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-8-Ball/Pods-8-Ball-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-8-Ball/Pods-8-Ball-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

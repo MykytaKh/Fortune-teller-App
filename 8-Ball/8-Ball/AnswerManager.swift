@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 protocol AnswerManagerProtocol {
-    func fetchAnswer(success: @escaping (String) -> (), failure: @escaping () -> ())
+    func fetchAnswer(success: @escaping (String) -> Void, failure: @escaping () -> Void)
 }
 
 class AnswerManager: AnswerManagerProtocol {
-    
+
     private let defaultAnswers = ["It is certain",
                                   "It is decidedly so",
                                   "Without a doubt",
@@ -37,13 +37,13 @@ class AnswerManager: AnswerManagerProtocol {
     private var userAnswers = [String]()
     private let networkService: NetworkProtocol
     private let dbService: DBServiceProtocol
-    
+
     init(networkService: NetworkProtocol = Network(), dbService: DBServiceProtocol = DBService()) {
         self.networkService = networkService
         self.dbService = dbService
     }
-    
-    func fetchAnswer(success: @escaping (String) -> (), failure: @escaping () -> ()) {
+
+    func fetchAnswer(success: @escaping (String) -> Void, failure: @escaping () -> Void) {
         networkService.fetchResponse { answer in
             success(answer)
         } failure: { [weak self]  in

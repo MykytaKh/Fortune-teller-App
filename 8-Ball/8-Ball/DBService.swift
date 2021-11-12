@@ -13,13 +13,13 @@ protocol DBServiceProtocol {
 }
 
 class DBService: DBServiceProtocol {
-    
+
     private let keyToAnswers = "keyToAnswers"
-    
+
     func saveUserAnswers(array: [String]) {
         UserDefaults.standard.set(array, forKey: keyToAnswers)
     }
-    
+
     func getUserAnswers() -> [String] {
         if let answers = UserDefaults.standard.array(forKey: keyToAnswers) as? [String] {
             return answers
