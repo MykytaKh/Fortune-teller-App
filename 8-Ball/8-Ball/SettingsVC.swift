@@ -13,8 +13,13 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var answersTableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var inputTextField: UITextField!
-    var answers = [String]()
     
+    private var answers = [String]()
+    private var dbService: DBService!
+    
+    func setDbService(_ value: DBService) {
+        self.dbService = value
+    }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         if let answer = inputTextField.text, !answer.isEmpty {
@@ -24,7 +29,6 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             inputTextField.resignFirstResponder()
         }
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answers.count
@@ -36,7 +40,6 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if index < answers.count {
             cell.textLabel?.text = answers[index]
         }
-        
         cell.selectionStyle = .none
         return cell
     }
@@ -51,16 +54,12 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UserDefaults.standard.set(answers, forKey: keyToAnwers)
+        dbService.saveUserAnswers(array: answers)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let answers = UserDefaults.standard.array(forKey: keyToAnwers) as? [String] {
-            self.answers = answers
-            answersTableView.reloadData()
-        }
+        self.answers = dbService.getUserAnswers()
+        answersTableView.reloadData()
     }
 }
-
-
