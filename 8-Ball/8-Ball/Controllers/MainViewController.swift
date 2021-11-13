@@ -12,18 +12,17 @@ class MainViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
 
     private var answerManager: AnswerManager!
-
     func setAnswerManager(_ value: AnswerManager) {
         self.answerManager = value
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        messageLabel.text = "Ask any question and Shake me!"
+        messageLabel.text = L10n.FirstResponse.title
     }
 
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        messageLabel.text = "Look into the future"
+        messageLabel.text = L10n.Motion.Began.title
     }
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
@@ -34,14 +33,13 @@ class MainViewController: UIViewController {
                 }
             } failure: { [weak self] in
                 DispatchQueue.main.async {
-                    self?.messageLabel.text = "Error! Try again later!"
+                    self?.messageLabel.text = L10n.Cancel.Error.title
                 }
             }
         }
     }
-
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        messageLabel.text = "Try again"
+        messageLabel.text = L10n.Cancelled.title
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
