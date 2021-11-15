@@ -8,21 +8,21 @@
 import Foundation
 
 protocol NetworkProtocol {
-    func fetchResponse(success: @escaping (String) -> (), failure: @escaping () -> ())
+    func fetchResponse(success: @escaping (String) -> Void, failure: @escaping () -> Void)
 }
 
 class Network: NetworkProtocol {
-    
+
     private let urlString: String
     private let urlSession: URLSession
-    
+
     init(urlSession: URLSession = URLSession.shared) {
         self.urlString = "https://8ball.delegator.com/magic/JSON/question_string"
         self.urlSession = urlSession
     }
-    
-    func fetchResponse(success: @escaping (String) -> (), failure: @escaping () -> ()) {
-        
+
+    func fetchResponse(success: @escaping (String) -> Void, failure: @escaping () -> Void) {
+
         guard let url = URL(string: self.urlString) else {
             failure()
             return
@@ -42,7 +42,8 @@ class Network: NetworkProtocol {
                 return
             }
             do {
-                guard let parsedJsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                guard let parsedJsonData = try JSONSerialization.jsonObject(with: data, options: [])
+                        as? [String: Any] else {
                     failure()
                     return
                 }

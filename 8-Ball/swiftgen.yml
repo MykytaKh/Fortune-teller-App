@@ -1,0 +1,11 @@
+strings:
+  inputs: 8-Ball/Resources
+  outputs:
+    - templateName: structured-swift5
+      output: 8-Ball/Resources/Generated/Strings.swift
+xcassets:
+  inputs: 8-Ball/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      output: 8-Ball/Resources/Generated/Assets.swift
+

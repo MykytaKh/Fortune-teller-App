@@ -2,7 +2,8 @@
 
 target '8-Ball' do
   use_frameworks!
-pod 'Alamofire', '~> 4.9.1'
-
+pod 'SwiftLint', '~> 0.45'
+pod 'Alamofire'
+pod 'SwiftGen', '~> 6.1'
 
 end
