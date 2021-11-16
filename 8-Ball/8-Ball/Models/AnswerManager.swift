@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol AnswerManagerProtocol {
     func fetchAnswer(success: @escaping (String) -> Void, failure: @escaping () -> Void)
@@ -14,42 +13,18 @@ protocol AnswerManagerProtocol {
 
 class AnswerManager: AnswerManagerProtocol {
 
-    private let defaultAnswers = ["It is certain",
-                                  "It is decidedly so",
-                                  "Without a doubt",
-                                  "Yes, definitely",
-                                  "You may rely on it",
-                                  "As I see it, yes",
-                                  "Most likely",
-                                  "Outlook good",
-                                  "Yes",
-                                  "Signs point to yes",
-                                  "Reply hazy try again",
-                                  "Ask again later",
-                                  "Better not tell you now",
-                                  "Cannot predict now",
-                                  "Concentrate and ask again",
-                                  "Don't count on it",
-                                  "My reply is no",
-                                  "My sources say no",
-                                  "Outlook not so good",
-                                  "Very doubtful"]
-    private var userAnswers = [String]()
-    private let networkService: NetworkProtocol
-    private let dbService: DBServiceProtocol
-
-    init(networkService: NetworkProtocol = Network(), dbService: DBServiceProtocol = DBService()) {
+    private let networkService: Network
+    init(networkService: Network = Network()) {
         self.networkService = networkService
-        self.dbService = dbService
     }
 
     func fetchAnswer(success: @escaping (String) -> Void, failure: @escaping () -> Void) {
         networkService.fetchResponse { answer in
-            success(answer)
-        } failure: { [weak self]  in
-            if let userAnswer = self?.dbService.getUserAnswers().randomElement() {
+            success(answer.uppercased())
+        } failure: {
+            if let userAnswer = DefaultAnswerVM(answerType: .user).getValue() {
                 success(userAnswer)
-            } else if let defaultAnswer = self?.defaultAnswers.randomElement() {
+            } else if let defaultAnswer = DefaultAnswerVM(answerType: .local).getValue() {
                 success(defaultAnswer)
             } else {
                 failure()
