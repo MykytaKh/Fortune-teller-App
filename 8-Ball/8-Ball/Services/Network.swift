@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 protocol NetworkProtocol {
     func fetchResponse(success: @escaping (String) -> Void, failure: @escaping () -> Void)
