@@ -20,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
           if let mainVC = storyboard.instantiateViewController(withIdentifier: "main") as? AnswerViewController {
-           mainVC.setAnswerManager(AnswerManager(networkService: Network()))
            let navigation = UINavigationController(rootViewController: mainVC)
            window.rootViewController = navigation
            self.window = window

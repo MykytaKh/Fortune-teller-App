@@ -10,10 +10,6 @@ import UIKit
 class AnswerViewController: UIViewController {
 
     @IBOutlet var answerView: AnswerView!
-    private var answerManager: AnswerManager!
-    func setAnswerManager(_ value: AnswerManager) {
-        self.answerManager = value
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +22,7 @@ class AnswerViewController: UIViewController {
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            answerManager.fetchAnswer { [weak self] answer in
-                DispatchQueue.main.async {
-                    self?.answerView.setLabel(text: answer)
-                }
-            } failure: { [weak self] in
-                DispatchQueue.main.async {
-                    self?.answerView.setLabel(text: L10n.Cancel.Error.title)
-                }
-            }
+            answerView.updateLabel()
         }
     }
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {

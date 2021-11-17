@@ -14,7 +14,7 @@ class SettingsView: UIView, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var inputTextField: UITextField!
     var settingsVM: SettingsVM?
     func didLoad() {
-        settingsVM = SettingsVM(dbService: DBService())
+        settingsVM = SettingsVM()
         answersTableView.reloadData()
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,7 +39,7 @@ class SettingsView: UIView, UITableViewDataSource, UITableViewDelegate {
         var answers = settingsVM.getAnswers()
         if editingStylefor == .delete, index < answers.count {
             answers.remove(at: index)
-            settingsVM.setAnswers(value: answers)
+            settingsVM.setAnswers(answers: answers)
             answersTableView.reloadData()
         }
     }
@@ -50,7 +50,7 @@ class SettingsView: UIView, UITableViewDataSource, UITableViewDelegate {
         if let answer = inputTextField.text, !answer.isEmpty {
             var answers = settingsVM.getAnswers()
             answers.append(answer)
-            settingsVM.setAnswers(value: answers)
+            settingsVM.setAnswers(answers: answers)
             answersTableView.reloadData()
             inputTextField.text = ""
             inputTextField.resignFirstResponder()

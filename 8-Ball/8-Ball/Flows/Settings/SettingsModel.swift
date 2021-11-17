@@ -7,11 +7,11 @@
 
 import Foundation
 
-class SettingsVM {
+class SettingsModel {
     private var dbService: DBService!
     private var answers: [String]!
-    init(dbService: DBService) {
-        self.dbService = dbService
+    init() {
+        self.dbService = DBService()
         self.answers = getAnswersFromDB()
     }
     private func saveToDB(answers: [String]) {

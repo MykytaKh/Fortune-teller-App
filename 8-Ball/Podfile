@@ -3,7 +3,6 @@
 target '8-Ball' do
   use_frameworks!
 pod 'SwiftLint', '~> 0.45'
-pod 'Alamofire'
 pod 'SwiftGen', '~> 6.1'
 
 end
