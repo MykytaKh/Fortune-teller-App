@@ -8,14 +8,16 @@ import SnapKit
 import UIKit
 
 class AnswerViewController: UIViewController {
-    private var messageLabel = UILabel()
+    private let settingsVC: SettingsVC
     private let answerVM: AnswerVM
-    private var magicLabel = UILabel()
-    private var imageView = UIImageView()
-    private var settingsButton = UIButton(type: .system)
+    private let messageLabel = UILabel()
+    private let magicLabel = UILabel()
+    private let imageView = UIImageView()
+    private let settingsButton = UIButton(type: .system)
 
-    init(answerVM: AnswerVM) {
+    init(answerVM: AnswerVM, settingsVC: SettingsVC) {
         self.answerVM = answerVM
+        self.settingsVC = settingsVC
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -57,7 +59,7 @@ class AnswerViewController: UIViewController {
         imageView.image =  UIImage(named: Asset.ball.name)
         view.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.centerY.centerX.equalToSuperview()
+            make.center.equalToSuperview()
             make.top.greaterThanOrEqualTo(magicLabel).offset(45)
             make.bottom.lessThanOrEqualTo(30)
             make.leading.greaterThanOrEqualTo(5)
@@ -74,7 +76,7 @@ class AnswerViewController: UIViewController {
         view.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { make in
             make.leading.trailing.equalTo(imageView).inset(30)
-            make.centerY.centerX.equalTo(imageView)
+            make.center.equalTo(imageView)
         }
 
         settingsButton.setTitle("", for: .normal)
@@ -89,7 +91,6 @@ class AnswerViewController: UIViewController {
         settingsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     @objc private func buttonTapped() {
-let settingsVC = SettingsVC()
         navigationController?.pushViewController(settingsVC, animated: true)
     }
 }

@@ -10,19 +10,28 @@ import UIKit
 import SnapKit
 
 class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    private var settingsVM: SettingsVM?
-    private var answersTableView = UITableView()
-    private var textField = UITextField()
-    private var saveButton = UIButton(type: .system)
+    private var settingsVM: SettingsVM
+    private let answersTableView = UITableView()
+    private let textField = UITextField()
+    private let saveButton = UIButton(type: .system)
+
+    init(settingsVM: SettingsVM) {
+        self.settingsVM = settingsVM
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsVM?.getAnswers().count ?? 0
+        return settingsVM.getAnswers().count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         let index = indexPath.row
-        if let answers = settingsVM?.getAnswers(),
-           index < answers.count {
+        let answers = settingsVM.getAnswers()
+        if   index < answers.count {
             cell.textLabel?.text = answers[index]
         }
         cell.selectionStyle = .none
@@ -31,9 +40,6 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    commit editingStylefor: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let index = indexPath.row
-        guard let settingsVM = settingsVM else {
-            return
-        }
         var answers = settingsVM.getAnswers()
         if editingStylefor == .delete, index < answers.count {
             answers.remove(at: index)
@@ -42,10 +48,6 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     @objc private func buttonTapped(_ sender: Any) {
-        guard let settingsVM = settingsVM else {
-            return
-        }
-
         if let answer = textField.text, !answer.isEmpty {
             var answers = settingsVM.getAnswers()
             answers.append(answer)

@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                       localDefaultAnswerModel: localDefaultAnswerModel,
                                       answerManager: answerManager)
         let answerVM = AnswerVM(answerModel: answerModel)
-        let answerVC = AnswerViewController(answerVM: answerVM)
+        let settingsVM = SettingsVM()
+        let settingsVC = SettingsVC(settingsVM: settingsVM)
+        let answerVC = AnswerViewController(answerVM: answerVM, settingsVC: settingsVC)
         let mainVC = answerVC
         let navigation = UINavigationController(rootViewController: mainVC)
         window.rootViewController = navigation
