@@ -12,8 +12,17 @@ enum AnswerType {
 }
 
 class AnswerModel {
+    private var answerManager: AnswerManager
+    private var localDefaultAnswerModel: LocalDefaultAnswerModel
+    private var userDefaultAnswerModel: UserDefaultAnswerModel
+    init(userDefaultAnswerModel: UserDefaultAnswerModel, localDefaultAnswerModel: LocalDefaultAnswerModel,
+         answerManager: AnswerManager) {
+        self.userDefaultAnswerModel = userDefaultAnswerModel
+        self.localDefaultAnswerModel = localDefaultAnswerModel
+        self.answerManager = answerManager
+    }
     func fetchNewValue(onFinish: @escaping (String) -> Void) {
-    AnswerManager(networkService: Network()).fetchAnswer { answer in
+        answerManager.fetchAnswer { answer in
             onFinish(answer)
         } failure: { [weak self] in
             if let userAnswer = self?.getDefaultAnswer(answerType: .user) {
@@ -28,9 +37,9 @@ class AnswerModel {
     func getDefaultAnswer(answerType: AnswerType) -> String? {
         switch(answerType) {
         case .user:
-            return UserDefaultAnswerModel().answerValue
+            return userDefaultAnswerModel.answerValue
         case.local:
-            return LocalDefaultAnswerModel().answerValue
+            return localDefaultAnswerModel.answerValue
         }
     }
 }

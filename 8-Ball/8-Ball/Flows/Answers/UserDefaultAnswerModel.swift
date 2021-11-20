@@ -8,7 +8,11 @@
 import Foundation
 
 class UserDefaultAnswerModel {
+    private var dbService: DBService
+    init(dbService: DBService) {
+        self.dbService = dbService
+    }
      var answerValue: String? {
-        return DBService().getUserAnswers().randomElement()
+         return dbService.getUserAnswers().randomElement()
     }
 }

@@ -7,10 +7,11 @@
 
 import Foundation
 
-
-
 class AnswerVM {
-    let answerModel = AnswerModel()
+    let answerModel: AnswerModel
+    init(answerModel: AnswerModel) {
+        self.answerModel = answerModel
+    }
     func getValue(onFinish: @escaping (String) -> Void) {
         answerModel.fetchNewValue { answer in
             onFinish(answer.uppercased())

@@ -4,5 +4,6 @@ target '8-Ball' do
   use_frameworks!
 pod 'SwiftLint', '~> 0.45'
 pod 'SwiftGen', '~> 6.1'
+pod 'SnapKit'
 
 end

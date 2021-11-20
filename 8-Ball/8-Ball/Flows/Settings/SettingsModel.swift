@@ -8,7 +8,7 @@
 import Foundation
 
 class SettingsModel {
-    private var dbService: DBService!
+    private let dbService: DBService
     private var answers: [String]!
     init() {
         self.dbService = DBService()
