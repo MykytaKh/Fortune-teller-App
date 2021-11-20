@@ -10,9 +10,10 @@ import UIKit
 import SnapKit
 
 class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var settingsVM: SettingsVM?
-    var answersTableView = UITableView()
-    var textField = UITextField()
+    private var settingsVM: SettingsVM?
+    private var answersTableView = UITableView()
+    private var textField = UITextField()
+    private var saveButton = UIButton(type: .system)
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsVM?.getAnswers().count ?? 0
@@ -71,8 +72,7 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         textField.borderStyle = .roundedRect
 
-        let saveButton = UIButton(type: .system)
-        saveButton.setTitle("Save", for: .normal)
+        saveButton.setTitle(L10n.SaveButton.title, for: .normal)
         saveButton.backgroundColor = .label
         saveButton.tintColor = .systemBackground
         saveButton.layer.cornerRadius = 8

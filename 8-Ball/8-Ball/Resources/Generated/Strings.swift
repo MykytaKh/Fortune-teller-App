@@ -28,11 +28,26 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "firstResponse.title")
   }
 
+  internal enum Magic {
+    /// Magic 8 Ball
+    internal static let label = L10n.tr("Localizable", "magic.label")
+  }
+
   internal enum Motion {
     internal enum Began {
       /// Look into the future
       internal static let title = L10n.tr("Localizable", "motion.began.title")
     }
+  }
+
+  internal enum SaveButton {
+    /// Save
+    internal static let title = L10n.tr("Localizable", "saveButton.title")
+  }
+
+  internal enum Settings {
+    /// gearshape.fill
+    internal static let image = L10n.tr("Localizable", "settings.image")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

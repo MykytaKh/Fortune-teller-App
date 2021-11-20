@@ -8,8 +8,12 @@ import SnapKit
 import UIKit
 
 class AnswerViewController: UIViewController {
-    let messageLabel = UILabel()
+    private var messageLabel = UILabel()
     private let answerVM: AnswerVM
+    private var magicLabel = UILabel()
+    private var imageView = UIImageView()
+    private var settingsButton = UIButton(type: .system)
+
     init(answerVM: AnswerVM) {
         self.answerVM = answerVM
         super.init(nibName: nil, bundle: nil)
@@ -20,7 +24,7 @@ class AnswerViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-         initialize()
+         adjustUI()
         messageLabel.text = L10n.FirstResponse.title
     }
 
@@ -40,23 +44,21 @@ class AnswerViewController: UIViewController {
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         messageLabel.text = L10n.Cancelled.title
     }
-    private func initialize() {
+    private func adjustUI() {
         view.backgroundColor = .systemBackground
-        let label = UILabel()
-        label.text = "Magic 8 Ball"
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
+        magicLabel.text = L10n.Magic.label
+        magicLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        view.addSubview(magicLabel)
+        magicLabel.snp.makeConstraints { make in
             make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide).inset(5)
             make.centerX.equalToSuperview()
         }
 
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "emb")
+        imageView.image =  UIImage(named: Asset.ball.name)
         view.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.centerY.centerX.equalToSuperview()
-            make.top.greaterThanOrEqualTo(label).offset(45)
+            make.top.greaterThanOrEqualTo(magicLabel).offset(45)
             make.bottom.lessThanOrEqualTo(30)
             make.leading.greaterThanOrEqualTo(5)
             make.trailing.lessThanOrEqualTo(5)
@@ -74,10 +76,11 @@ class AnswerViewController: UIViewController {
             make.leading.trailing.equalTo(imageView).inset(30)
             make.centerY.centerX.equalTo(imageView)
         }
-        let settingsButton = UIButton(type: .system)
+
         settingsButton.setTitle("", for: .normal)
-        let imagge = UIImage(systemName: "gearshape.fill")
-        settingsButton.setImage(imagge?.withRenderingMode(.alwaysOriginal), for: .normal)
+
+        let settingsImage = UIImage(systemName: L10n.Settings.image)
+        settingsButton.setImage(settingsImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         view.addSubview(settingsButton)
         settingsButton.snp.makeConstraints { make in
             make.trailing.top.equalTo(view.safeAreaLayoutGuide)
@@ -87,6 +90,6 @@ class AnswerViewController: UIViewController {
     }
     @objc private func buttonTapped() {
 let settingsVC = SettingsVC()
-        navigationController?.pushViewController(settingsVC, animated: true)        
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
 }
