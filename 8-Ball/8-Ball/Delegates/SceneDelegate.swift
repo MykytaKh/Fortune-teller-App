@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                       localDefaultAnswerModel: localDefaultAnswerModel,
                                       answerManager: answerManager)
         let answerVM = AnswerVM(answerModel: answerModel)
-        let answerVC = AnswerViewController(answerVM: answerVM)
+        let settingsVM = SettingsVM()
+        let settingsVC = SettingsVC(settingsVM: settingsVM)
+        let answerVC = AnswerViewController(answerVM: answerVM, settingsVC: settingsVC)
         let mainVC = answerVC
         let navigation = UINavigationController(rootViewController: mainVC)
         window.rootViewController = navigation
@@ -51,5 +53,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-    }    
+    }
 }

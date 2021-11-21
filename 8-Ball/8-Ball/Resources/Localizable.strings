@@ -5,8 +5,13 @@
   Created by Никита Хламов on 13.11.2021.
   
 */
-// MainViewController:
+// AnswerViewController:
 "firstResponse.title" = "Ask any question and Shake me!";
 "motion.began.title" = "Look into the future";
 "cancel.error.title" = "Ups! Try again later!";
 "cancelled.title" = "Ups! Try again!";
+"magic.label" = "Magic 8 Ball";
+"settings.image" = "gearshape.fill";
+// SettingsVC:
+"saveButton.title" = "Save";
+
