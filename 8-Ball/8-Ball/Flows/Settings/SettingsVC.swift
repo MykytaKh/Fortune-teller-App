@@ -59,11 +59,11 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsVM = SettingsVM()
         adjustUI()
         answersTableView.reloadData()
     }
     private func adjustUI() {
+        title = L10n.Settings.title
         view.backgroundColor = .systemBackground
         view.addSubview(textField)
         textField.snp.makeConstraints { make in
@@ -79,13 +79,13 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         saveButton.tintColor = .systemBackground
         saveButton.layer.cornerRadius = 8
 
-               view.addSubview(saveButton)
+        view.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
             make.centerY.equalTo(textField)
             make.left.equalTo(textField.snp.right).inset(-15)
             make.height.equalTo(textField)
             make.width.equalTo(60)
-               }
+        }
         saveButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         view.addSubview(answersTableView)
         answersTableView.snp.makeConstraints { make in

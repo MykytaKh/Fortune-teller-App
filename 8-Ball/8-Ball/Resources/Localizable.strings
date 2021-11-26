@@ -5,13 +5,20 @@
   Created by Никита Хламов on 13.11.2021.
   
 */
-// AnswerViewController:
+// SceneDelegate:
+"ball.image" = "bitcoinsign.circle.fill";
+"settings.image" = "gearshape.fill";
+"history.image" = "externaldrive.fill.badge.timemachine";
+// Answer:
 "firstResponse.title" = "Ask any question and Shake me!";
 "motion.began.title" = "Look into the future";
 "cancel.error.title" = "Ups! Try again later!";
 "cancelled.title" = "Ups! Try again!";
 "magic.label" = "Magic 8 Ball";
-"settings.image" = "gearshape.fill";
-// SettingsVC:
+"answer.title" = "Magic Ball";
+// Settings:
 "saveButton.title" = "Save";
-
+"settings.title" = "User Answers";
+// AnswersHistory:
+"answersHistory.title" = "Answers History";
+"realm.error" = "Do-try-catch error!";

@@ -12,7 +12,7 @@ class UserDefaultAnswerModel {
     init(dbService: DBService) {
         self.dbService = dbService
     }
-     var answerValue: String? {
-         return dbService.getUserAnswers().randomElement()
+    var answerValue: String? {
+        return dbService.getUserAnswers().randomElement()
     }
 }

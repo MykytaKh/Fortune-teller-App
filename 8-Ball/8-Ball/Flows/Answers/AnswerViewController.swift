@@ -13,9 +13,10 @@ class AnswerViewController: UIViewController {
     private let messageLabel = UILabel()
     private let magicLabel = UILabel()
     private let imageView = UIImageView()
-    private let settingsButton = UIButton(type: .system)
+    private let answersHistoryVC: AnswersHistoryVC
 
-    init(answerVM: AnswerVM, settingsVC: SettingsVC) {
+    init(answerVM: AnswerVM, settingsVC: SettingsVC, answersHistoryVC: AnswersHistoryVC) {
+        self.answersHistoryVC = answersHistoryVC
         self.answerVM = answerVM
         self.settingsVC = settingsVC
         super.init(nibName: nil, bundle: nil)
@@ -26,7 +27,7 @@ class AnswerViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-         adjustUI()
+        adjustUI()
         messageLabel.text = L10n.FirstResponse.title
     }
 
@@ -39,6 +40,7 @@ class AnswerViewController: UIViewController {
             answerVM.getValue { [weak self] value in
                 DispatchQueue.main.async {
                     self?.messageLabel.text = value
+                    self?.answersHistoryVC.addAnswer(answer: value)
                 }
             }
         }
@@ -78,19 +80,5 @@ class AnswerViewController: UIViewController {
             make.leading.trailing.equalTo(imageView).inset(30)
             make.center.equalTo(imageView)
         }
-
-        settingsButton.setTitle("", for: .normal)
-
-        let settingsImage = UIImage(systemName: L10n.Settings.image)
-        settingsButton.setImage(settingsImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        view.addSubview(settingsButton)
-        settingsButton.snp.makeConstraints { make in
-            make.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(100)
-        }
-        settingsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-    }
-    @objc private func buttonTapped() {
-        navigationController?.pushViewController(settingsVC, animated: true)
     }
 }

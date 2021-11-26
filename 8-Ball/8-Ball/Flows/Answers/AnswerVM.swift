@@ -8,7 +8,7 @@
 import Foundation
 
 class AnswerVM {
-    let answerModel: AnswerModel
+    private let answerModel: AnswerModel
     init(answerModel: AnswerModel) {
         self.answerModel = answerModel
     }
