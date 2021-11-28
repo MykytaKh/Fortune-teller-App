@@ -16,6 +16,7 @@
 "cancelled.title" = "Ups! Try again!";
 "magic.label" = "Magic 8 Ball";
 "answer.title" = "Magic Ball";
+"cancel.error.noAnswers.title" = "Add some answers by yourself!";
 // Settings:
 "saveButton.title" = "Save";
 "settings.title" = "User Answers";

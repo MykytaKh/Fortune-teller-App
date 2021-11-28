@@ -30,6 +30,10 @@ internal enum L10n {
     internal enum Error {
       /// Ups! Try again later!
       internal static let title = L10n.tr("Localizable", "cancel.error.title")
+      internal enum NoAnswers {
+        /// Add some answers by yourself!
+        internal static let title = L10n.tr("Localizable", "cancel.error.noAnswers.title")
+      }
     }
   }
 

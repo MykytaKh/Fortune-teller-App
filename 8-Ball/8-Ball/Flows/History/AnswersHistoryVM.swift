@@ -6,18 +6,20 @@
 //
 
 import Foundation
-import RealmSwift
 
 class AnswersHistoryVM {
     private let answersHistoryModel: AnswersHistoryModel
-    init(answerHistoryModel: AnswersHistoryModel) {
-        self.answersHistoryModel = answerHistoryModel
+    init(answersHistoryModel: AnswersHistoryModel) {
+        self.answersHistoryModel = answersHistoryModel
     }
 
-    func getAnswers() -> Results<RealmService>! {
+    func getAnswers() -> [DataBaseService] {
         return answersHistoryModel.getAnswers()
     }
     func addAnswer(answer: String) {
         answersHistoryModel.addAnswer(answer: answer)
+    }
+    func deleteAnswer(index: Int) {
+        answersHistoryModel.deleteAnswer(index: index)
     }
 }

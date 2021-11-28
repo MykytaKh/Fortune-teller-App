@@ -16,7 +16,7 @@
 		6C17EFAF2744508200AAE829 /* UserDefaultAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C17EFAE2744508200AAE829 /* UserDefaultAnswerModel.swift */; };
 		6C1EEDC12745974E0064FA9C /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1EEDC02745974E0064FA9C /* AnswerModel.swift */; };
 		6C1EEDC32745A3CE0064FA9C /* SettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1EEDC22745A3CE0064FA9C /* SettingsVM.swift */; };
-		6C43E45D2750DDFF00DFCE75 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C43E45C2750DDFF00DFCE75 /* RealmService.swift */; };
+		6C43E45D2750DDFF00DFCE75 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C43E45C2750DDFF00DFCE75 /* DataBaseService.swift */; };
 		6C43E4622750DE7D00DFCE75 /* AnswersHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C43E4612750DE7D00DFCE75 /* AnswersHistoryModel.swift */; };
 		6C43E4642750DE9600DFCE75 /* AnswersHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C43E4632750DE9600DFCE75 /* AnswersHistoryVM.swift */; };
 		6C43E4662750DEB500DFCE75 /* AnswersHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C43E4652750DEB500DFCE75 /* AnswersHistoryVC.swift */; };
@@ -25,7 +25,6 @@
 		6C9A9E17271DCF85007E5DAA /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9E16271DCF85007E5DAA /* AnswerViewController.swift */; };
 		6C9A9E1C271DCF86007E5DAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C9A9E1B271DCF86007E5DAA /* Assets.xcassets */; };
 		6C9A9E1F271DCF86007E5DAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C9A9E1D271DCF86007E5DAA /* LaunchScreen.storyboard */; };
-		6C9B24102741740400FD8078 /* LocalDefaultAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9B240F2741740400FD8078 /* LocalDefaultAnswerModel.swift */; };
 		6CA30C23274045CD00B6CDE3 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6CA30C22274045CD00B6CDE3 /* swiftgen.yml */; };
 		6CA30C282740487E00B6CDE3 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA30C272740487E00B6CDE3 /* Strings.swift */; };
 		6CA30C3027404B5400B6CDE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6CA30C2F27404B5400B6CDE3 /* Localizable.strings */; };
@@ -44,7 +43,7 @@
 		6C17EFAE2744508200AAE829 /* UserDefaultAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultAnswerModel.swift; sourceTree = "<group>"; };
 		6C1EEDC02745974E0064FA9C /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
 		6C1EEDC22745A3CE0064FA9C /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
-		6C43E45C2750DDFF00DFCE75 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		6C43E45C2750DDFF00DFCE75 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
 		6C43E4612750DE7D00DFCE75 /* AnswersHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersHistoryModel.swift; sourceTree = "<group>"; };
 		6C43E4632750DE9600DFCE75 /* AnswersHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersHistoryVM.swift; sourceTree = "<group>"; };
 		6C43E4652750DEB500DFCE75 /* AnswersHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersHistoryVC.swift; sourceTree = "<group>"; };
@@ -55,7 +54,6 @@
 		6C9A9E1B271DCF86007E5DAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C9A9E1E271DCF86007E5DAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C9A9E20271DCF86007E5DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6C9B240F2741740400FD8078 /* LocalDefaultAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDefaultAnswerModel.swift; sourceTree = "<group>"; };
 		6CA30C22274045CD00B6CDE3 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		6CA30C272740487E00B6CDE3 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		6CA30C2F27404B5400B6CDE3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 			children = (
 				6C1EEDC02745974E0064FA9C /* AnswerModel.swift */,
 				6C17EFAE2744508200AAE829 /* UserDefaultAnswerModel.swift */,
-				6C9B240F2741740400FD8078 /* LocalDefaultAnswerModel.swift */,
 				6C17EFAC27444E7800AAE829 /* AnswerVM.swift */,
 				6C9A9E16271DCF85007E5DAA /* AnswerViewController.swift */,
 			);
@@ -184,7 +181,7 @@
 			children = (
 				6C05E461273A8CCF0040BB0B /* Network.swift */,
 				6C05E465273A8F8A0040BB0B /* DBService.swift */,
-				6C43E45C2750DDFF00DFCE75 /* RealmService.swift */,
+				6C43E45C2750DDFF00DFCE75 /* DataBaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -392,10 +389,9 @@
 				6C1EEDC32745A3CE0064FA9C /* SettingsVM.swift in Sources */,
 				6C9A9E15271DCF85007E5DAA /* SceneDelegate.swift in Sources */,
 				6CA30C3227404D1300B6CDE3 /* Assets.swift in Sources */,
-				6C9B24102741740400FD8078 /* LocalDefaultAnswerModel.swift in Sources */,
 				6C1EEDC12745974E0064FA9C /* AnswerModel.swift in Sources */,
 				6C17EFA927444DB700AAE829 /* SettingsModel.swift in Sources */,
-				6C43E45D2750DDFF00DFCE75 /* RealmService.swift in Sources */,
+				6C43E45D2750DDFF00DFCE75 /* DataBaseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,17 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let dBService = DBService()
+        let dataBaseService = DataBaseService()
         let userDefaultAnswerModel = UserDefaultAnswerModel(dbService: dBService)
-        let localDefaultAnswerModel = LocalDefaultAnswerModel()
         let answerManager = AnswerManager()
-        let answersHistoryModel = AnswersHistoryModel()
+        let answersHistoryModel = AnswersHistoryModel(dataBaseService: dataBaseService)
         let answerModel = AnswerModel(userDefaultAnswerModel: userDefaultAnswerModel,
-                                      localDefaultAnswerModel: localDefaultAnswerModel,
                                       answerManager: answerManager, answersHistoryModel: answersHistoryModel)
         let answerVM = AnswerVM(answerModel: answerModel)
         let settingsVM = SettingsVM()
-        let answerHistoryModel = AnswersHistoryModel()
-        let answersHistoryVM = AnswersHistoryVM(answerHistoryModel: answerHistoryModel)
+        let answersHistoryVM = AnswersHistoryVM(answersHistoryModel: answersHistoryModel)
         let answersHistoryVC = AnswersHistoryVC(answersHistoryVM: answersHistoryVM)
         let settingsVC = SettingsVC(settingsVM: settingsVM)
         let answerVC = AnswerViewController(answerVM: answerVM, settingsVC: settingsVC,

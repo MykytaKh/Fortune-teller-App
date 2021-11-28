@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 import SnapKit
-import RealmSwift
 
 class AnswersHistoryVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let answersTableView = UITableView()
     private var answersHistoryVM: AnswersHistoryVM
-    var answers: Results<RealmService>!
+    var answers: [DataBaseService] {
+        return answersHistoryVM.getAnswers()
+    }
 
     init(answersHistoryVM: AnswersHistoryVM) {
         self.answersHistoryVM = answersHistoryVM
@@ -42,22 +43,13 @@ class AnswersHistoryVC: UIViewController, UITableViewDataSource, UITableViewDele
                    commit editingStylefor: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let index = indexPath.row
         if editingStylefor == .delete, index < answers.count {
-            do {
-                let realm = try Realm()
-                let answer = self.answers[index]
-                try realm.write {
-                    realm.delete(answer)
-                }
-            } catch {
-                print(L10n.Realm.error)
-            }
+            answersHistoryVM.deleteAnswer(index: index)
             self.answersTableView.reloadData()
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustUI()
-        self.answers = answersHistoryVM.getAnswers()
         answersTableView.reloadData()
     }
     private func adjustUI() {

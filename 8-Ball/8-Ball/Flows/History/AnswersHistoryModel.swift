@@ -6,44 +6,23 @@
 //
 
 import Foundation
-import RealmSwift
 
 class AnswersHistoryModel {
-    var answers: Results<RealmService>!
+    private let dataBaseService: DataBaseService
     var answerValue: String? {
-        do {
-            let realm = try Realm()
-            let realmObjects = realm.objects(RealmService.self)
-            let randomObject = realmObjects.randomElement()
-            let randomObjectName = randomObject?.name
-            return randomObjectName
-        } catch {
-            print(L10n.Realm.error)
-            return nil
-        }
+       return dataBaseService.getRandomAnswer()
+    }
+    init(dataBaseService: DataBaseService) {
+        self.dataBaseService = dataBaseService
     }
 
-    func getAnswers() -> Results<RealmService>! {
-        do {
-            let realm = try Realm()
-            let answers = realm.objects(RealmService.self).sorted(byKeyPath: "date", ascending: false)
-            return answers
-        } catch {
-            print("Error")
-        }
-        return answers
+    func getAnswers() -> [DataBaseService] {
+        return dataBaseService.getAnswers()
     }
     func addAnswer(answer: String) {
-        let answers = RealmService()
-        answers.name = answer
-        answers.date = Date()
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(answers)
-            }
-        } catch {
-            print("Error")
-        }
+        dataBaseService.addAnswer(answer: answer)
+    }
+    func deleteAnswer(index: Int) {
+        dataBaseService.deleteAnswer(index: index)
     }
 }
