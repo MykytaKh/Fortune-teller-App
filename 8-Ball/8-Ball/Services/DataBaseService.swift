@@ -54,7 +54,7 @@ class DataBaseService: Object {
     func deleteAnswer(index: Int) {
         do {
             let realm = try Realm()
-            let realmObjects = realm.objects(DataBaseService.self)
+            let realmObjects = realm.objects(DataBaseService.self).sorted(byKeyPath: "date", ascending: false)
             let answer = realmObjects[index]
             try realm.write {
                 realm.delete(answer)
