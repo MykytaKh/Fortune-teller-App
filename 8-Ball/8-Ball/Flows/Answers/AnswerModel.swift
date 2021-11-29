@@ -15,11 +15,14 @@ class AnswerModel {
     private var answerManager: AnswerManager
     private var userDefaultAnswerModel: UserDefaultAnswerModel
     private var answersHistoryModel: AnswersHistoryModel
+    private let dataBaseService: DataBaseService
+
     init(userDefaultAnswerModel: UserDefaultAnswerModel,
-         answerManager: AnswerManager, answersHistoryModel: AnswersHistoryModel) {
+         answerManager: AnswerManager, answersHistoryModel: AnswersHistoryModel, dataBaseService: DataBaseService) {
         self.answersHistoryModel = answersHistoryModel
         self.userDefaultAnswerModel = userDefaultAnswerModel
         self.answerManager = answerManager
+        self.dataBaseService = dataBaseService
     }
     func fetchNewValue(onFinish: @escaping (String) -> Void) {
         answerManager.fetchAnswer { answer in
@@ -41,5 +44,8 @@ class AnswerModel {
         case.history:
             return answersHistoryModel.answerValue
         }
+    }
+    func addAnswer(answer: String) {
+        dataBaseService.addAnswer(answer: answer)
     }
 }

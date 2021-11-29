@@ -11,15 +11,11 @@ import RealmSwift
 class DataBaseService {
 
     func addAnswer(answer: String) {
-//        let answerRef = ThreadSafeReference(to: answers)
         DispatchQueue.global(qos: .background).async {
             autoreleasepool {
                 let answers = ManagedAnswer()
         do {
             let realm = try Realm()
-//            guard let answers = realm.resolve(answerRef) else {
-//                return
-//            }
             answers.name = answer
             answers.date = Date()
             try realm.write {

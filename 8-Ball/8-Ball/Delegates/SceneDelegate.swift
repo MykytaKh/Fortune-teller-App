@@ -19,14 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let answerManager = AnswerManager()
         let answersHistoryModel = AnswersHistoryModel(dataBaseService: dataBaseService)
         let answerModel = AnswerModel(userDefaultAnswerModel: userDefaultAnswerModel,
-                                      answerManager: answerManager, answersHistoryModel: answersHistoryModel)
+                                      answerManager: answerManager,
+                                      answersHistoryModel: answersHistoryModel, dataBaseService: dataBaseService)
         let answerVM = AnswerVM(answerModel: answerModel)
         let settingsVM = SettingsVM()
         let answersHistoryVM = AnswersHistoryVM(answersHistoryModel: answersHistoryModel)
         let answersHistoryVC = AnswersHistoryVC(answersHistoryVM: answersHistoryVM)
         let settingsVC = SettingsVC(settingsVM: settingsVM)
-        let answerVC = AnswerViewController(answerVM: answerVM, settingsVC: settingsVC,
-                                            answersHistoryVC: answersHistoryVC)
+        let answerVC = AnswerViewController(answerVM: answerVM)
         let tabBarController = UITabBarController()
         let navigationHistory = UINavigationController(rootViewController: answersHistoryVC)
         let navigationSettings = UINavigationController(rootViewController: settingsVC)

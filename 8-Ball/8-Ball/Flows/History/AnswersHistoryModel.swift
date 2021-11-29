@@ -19,9 +19,6 @@ class AnswersHistoryModel {
     func getAnswers() -> [ManagedAnswer] {
         return dataBaseService.getAnswers()
     }
-    func addAnswer(answer: String) {
-        dataBaseService.addAnswer(answer: answer)
-    }
     func deleteAnswer(index: Int) {
         dataBaseService.deleteAnswer(index: index)
     }

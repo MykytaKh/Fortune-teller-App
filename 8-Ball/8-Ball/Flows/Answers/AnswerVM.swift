@@ -17,4 +17,7 @@ class AnswerVM {
             onFinish(answer.uppercased())
         }
     }
+    func addAnswer(answer: String) {
+        answerModel.addAnswer(answer: answer)
+    }
 }

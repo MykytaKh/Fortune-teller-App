@@ -16,9 +16,6 @@ class AnswersHistoryVM {
     func getAnswers() -> [ManagedAnswer] {
         return answersHistoryModel.getAnswers()
     }
-    func addAnswer(answer: String) {
-        answersHistoryModel.addAnswer(answer: answer)
-    }
     func deleteAnswer(index: Int) {
         answersHistoryModel.deleteAnswer(index: index)
     }

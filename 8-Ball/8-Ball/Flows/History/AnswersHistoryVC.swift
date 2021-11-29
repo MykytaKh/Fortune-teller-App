@@ -24,10 +24,6 @@ class AnswersHistoryVC: UIViewController, UITableViewDataSource, UITableViewDele
         fatalError("init(coder:) has not been implemented")
     }
 
-    func addAnswer(answer: String) {
-        answersHistoryVM.addAnswer(answer: answer)
-        self.answersTableView.reloadData()
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answers.count
     }
@@ -50,6 +46,9 @@ class AnswersHistoryVC: UIViewController, UITableViewDataSource, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustUI()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         answersTableView.reloadData()
     }
     private func adjustUI() {

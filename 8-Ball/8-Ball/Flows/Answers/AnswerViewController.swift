@@ -8,17 +8,13 @@ import SnapKit
 import UIKit
 
 class AnswerViewController: UIViewController {
-    private let settingsVC: SettingsVC
     private let answerVM: AnswerVM
     private let messageLabel = UILabel()
     private let magicLabel = UILabel()
     private let imageView = UIImageView()
-    private let answersHistoryVC: AnswersHistoryVC
 
-    init(answerVM: AnswerVM, settingsVC: SettingsVC, answersHistoryVC: AnswersHistoryVC) {
-        self.answersHistoryVC = answersHistoryVC
+    init(answerVM: AnswerVM) {
         self.answerVM = answerVM
-        self.settingsVC = settingsVC
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,7 +36,7 @@ class AnswerViewController: UIViewController {
             answerVM.getValue { [weak self] value in
                 DispatchQueue.main.async {
                     self?.messageLabel.text = value
-                    self?.answersHistoryVC.addAnswer(answer: value)
+                    self?.answerVM.addAnswer(answer: value)
                 }
             }
         }
