@@ -16,7 +16,7 @@ class AnswersHistoryModel {
         self.dataBaseService = dataBaseService
     }
 
-    func getAnswers() -> [DataBaseService] {
+    func getAnswers() -> [ManagedAnswer] {
         return dataBaseService.getAnswers()
     }
     func addAnswer(answer: String) {

@@ -12,7 +12,7 @@ import SnapKit
 class AnswersHistoryVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let answersTableView = UITableView()
     private var answersHistoryVM: AnswersHistoryVM
-    var answers: [DataBaseService] {
+    var answers: [ManagedAnswer] {
         return answersHistoryVM.getAnswers()
     }
 

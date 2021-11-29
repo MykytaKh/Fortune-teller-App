@@ -8,14 +8,12 @@
 import Foundation
 import RealmSwift
 
-class DataBaseService: Object {
-    @objc dynamic var name = ""
-    @objc dynamic var date = Date()
+class DataBaseService {
 
-    var answers: Results<DataBaseService>!
+    var answers: Results<ManagedAnswer>!
 
     func addAnswer(answer: String) {
-        let answers = DataBaseService()
+        let answers = ManagedAnswer()
         answers.name = answer
         answers.date = Date()
         do {
@@ -27,10 +25,10 @@ class DataBaseService: Object {
             print("Error")
         }
     }
-    func getAnswers() -> [DataBaseService] {
+    func getAnswers() -> [ManagedAnswer] {
         do {
             let realm = try Realm()
-            let answers = realm.objects(DataBaseService.self).sorted(byKeyPath: "date", ascending: false)
+            let answers = realm.objects(ManagedAnswer.self).sorted(byKeyPath: "date", ascending: false)
             let arrayAnswers = Array(answers)
             return arrayAnswers
         } catch {
@@ -42,7 +40,7 @@ class DataBaseService: Object {
     func getRandomAnswer() -> String? {
         do {
             let realm = try Realm()
-            let realmObjects = realm.objects(DataBaseService.self)
+            let realmObjects = realm.objects(ManagedAnswer.self)
             let randomObject = realmObjects.randomElement()
             let randomObjectName = randomObject?.name
             return randomObjectName
@@ -54,7 +52,7 @@ class DataBaseService: Object {
     func deleteAnswer(index: Int) {
         do {
             let realm = try Realm()
-            let realmObjects = realm.objects(DataBaseService.self).sorted(byKeyPath: "date", ascending: false)
+            let realmObjects = realm.objects(ManagedAnswer.self).sorted(byKeyPath: "date", ascending: false)
             let answer = realmObjects[index]
             try realm.write {
                 realm.delete(answer)

@@ -13,7 +13,7 @@ class AnswersHistoryVM {
         self.answersHistoryModel = answersHistoryModel
     }
 
-    func getAnswers() -> [DataBaseService] {
+    func getAnswers() -> [ManagedAnswer] {
         return answersHistoryModel.getAnswers()
     }
     func addAnswer(answer: String) {
