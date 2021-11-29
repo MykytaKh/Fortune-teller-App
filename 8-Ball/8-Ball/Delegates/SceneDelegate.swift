@@ -45,6 +45,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigation = UINavigationController(rootViewController: tabBarController)
         window.rootViewController = navigation
         self.window = window
+        if #available(iOS 13.0, *) {
+            window.overrideUserInterfaceStyle = .light
+        }
         window.makeKeyAndVisible()
     }
     func sceneDidDisconnect(_ scene: UIScene) {
