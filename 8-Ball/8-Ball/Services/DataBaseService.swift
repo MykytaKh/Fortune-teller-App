@@ -14,53 +14,65 @@ class DataBaseService {
         DispatchQueue.global(qos: .background).async {
             autoreleasepool {
                 let answers = ManagedAnswer()
-        do {
-            let realm = try Realm()
-            answers.name = answer
-            answers.date = Date()
-            try realm.write {
-                realm.add(answers)
-                realm.refresh()
-            }
-        } catch {
-            print("Error")
-        }
+                do {
+                    let realm = try Realm()
+                    answers.name = answer
+                    answers.date = Date()
+                    try realm.write {
+                        realm.add(answers)
+                        realm.refresh()
+                    }
+                } catch {
+                    print("Error")
+                }
             }
         }
     }
     func getAnswers() -> [ManagedAnswer] {
-        do {
-            let realm = try Realm()
-            let answers = realm.objects(ManagedAnswer.self).sorted(byKeyPath: "date", ascending: false)
-            let arrayAnswers = Array(answers)
-            return arrayAnswers
-        } catch {
-            print("Error")
+        DispatchQueue.global(qos: .background).sync {
+            autoreleasepool {
+                do {
+                    let realm = try Realm()
+                    let answers = realm.objects(ManagedAnswer.self).sorted(byKeyPath: "date", ascending: false)
+                    let arrayAnswers = Array(answers)
+                    return arrayAnswers
+                } catch {
+                    print("Error")
+                }
+                return []
+            }
         }
-        return []
     }
     func getRandomAnswer() -> String? {
-        do {
-            let realm = try Realm()
-            let realmObjects = realm.objects(ManagedAnswer.self)
-            let randomObject = realmObjects.randomElement()
-            let randomObjectName = randomObject?.name
-            return randomObjectName
-        } catch {
-            print(L10n.Realm.error)
-            return nil
+        DispatchQueue.global(qos: .background).sync {
+            autoreleasepool {
+                do {
+                    let realm = try Realm()
+                    let realmObjects = realm.objects(ManagedAnswer.self)
+                    let randomObject = realmObjects.randomElement()
+                    let randomObjectName = randomObject?.name
+                    return randomObjectName
+                } catch {
+                    print(L10n.Realm.error)
+                    return nil
+                }
+            }
         }
     }
     func deleteAnswer(index: Int) {
-        do {
-            let realm = try Realm()
-            let realmObjects = realm.objects(ManagedAnswer.self).sorted(byKeyPath: "date", ascending: false)
-            let answer = realmObjects[index]
-            try realm.write {
-                realm.delete(answer)
+        DispatchQueue.global(qos: .background).sync {
+            autoreleasepool {
+                do {
+                    let realm = try Realm()
+                    let realmObjects = realm.objects(ManagedAnswer.self).sorted(byKeyPath: "date", ascending: false)
+                    let answer = realmObjects[index]
+                    try realm.write {
+                        realm.delete(answer)
+                    }
+                } catch {
+                    print("Error")
+                }
             }
-        } catch {
-            print("Error")
         }
     }
 }
