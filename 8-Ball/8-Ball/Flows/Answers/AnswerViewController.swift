@@ -12,7 +12,8 @@ class AnswerViewController: UIViewController {
     private let answerVM: AnswerVM
     private let messageLabel = UILabel()
     private let magicLabel = UILabel()
-    private let imageView = UIImageView()
+    private let magicBall = UIImageView()
+    private let magicTriangle = UIImageView()
 
     init(answerVM: AnswerVM) {
         self.answerVM = answerVM
@@ -34,10 +35,14 @@ class AnswerViewController: UIViewController {
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
+            animateBall()
+            animateTriangle()
             answerVM.getValue { [weak self] value in
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     self?.messageLabel.text = value
                     self?.answerVM.addAnswer(answer: value)
+                    self?.stopAnimation()
+                    self?.animateLable()
                 }
             }
         }
@@ -58,17 +63,22 @@ class AnswerViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
 
-        imageView.image =  UIImage(named: Asset.ball.name)
-        view.addSubview(imageView)
-        imageView.snp.makeConstraints { (make) in
+        magicBall.image =  UIImage(named: Asset.ball.name)
+        view.addSubview(magicBall)
+        magicBall.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
             make.top.greaterThanOrEqualTo(magicLabel).offset(45)
             make.bottom.lessThanOrEqualTo(30)
             make.leading.greaterThanOrEqualTo(5)
             make.trailing.lessThanOrEqualTo(5)
-            make.width.equalTo(imageView.snp.height)
+            make.width.equalTo(magicBall.snp.height)
             make.width.height.equalToSuperview().priority(.high)
             make.height.lessThanOrEqualTo(view.frame.size.height)
+        }
+
+        view.addSubview(magicTriangle)
+        magicTriangle.snp.makeConstraints { make in
+            make.center.equalTo(magicBall)
         }
 
         messageLabel.numberOfLines = 0
@@ -77,8 +87,49 @@ class AnswerViewController: UIViewController {
         messageLabel.textAlignment = .center
         view.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(imageView).inset(30)
-            make.center.equalTo(imageView)
+            make.leading.trailing.equalTo(magicBall).inset(30)
+            make.center.equalTo(magicBall)
         }
+    }
+
+   private func animateImages(for name: String) -> [UIImage] {
+        var number = 0
+        var images = [UIImage]()
+        while let image = UIImage(named: "\(name)\(number)") {
+            images.append(image)
+            number += 1
+        }
+        return images
+    }
+
+    private func animateTriangle() {
+        magicTriangle.animationImages = animateImages(for: L10n.Triangle.name)
+        magicTriangle.animationDuration = 0.5
+        magicTriangle.animationRepeatCount = 100
+        magicTriangle.image = magicTriangle.animationImages?.first
+        magicTriangle.startAnimating()
+    }
+
+    private func animateLable() {
+        self.messageLabel.isHidden = false
+        UIView.animate(withDuration: 6) {
+            self.messageLabel.transform = CGAffineTransform(scaleX: 6, y: 6)
+        }
+        UIView.animate(withDuration: 7) {
+            self.messageLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
+
+    private func animateBall() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut, .repeat, .autoreverse]) {
+            self.magicBall.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }
+    }
+
+    private func stopAnimation() {
+        UIView.animate(withDuration: 0, animations: {
+            self.magicBall.transform = CGAffineTransform(scaleX: 1, y: 1)
+        })
+        self.magicTriangle.stopAnimating()
     }
 }

@@ -70,7 +70,6 @@ class AnswersHistoryVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
 
     private func adjustUI() {
-        title = L10n.AnswersHistory.title
         view.backgroundColor = .systemBackground
 
         view.addSubview(answersTableView)

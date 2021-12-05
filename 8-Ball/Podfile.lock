@@ -1,4 +1,5 @@
 PODS:
+  - RAMAnimatedTabBarController (5.2.0)
   - Realm (10.19.0):
     - Realm/Headers (= 10.19.0)
   - Realm/Headers (10.19.0)
@@ -9,6 +10,7 @@ PODS:
   - SwiftLint (0.45.0)
 
 DEPENDENCIES:
+  - RAMAnimatedTabBarController
   - RealmSwift (~> 10)
   - SnapKit
   - SwiftGen (~> 6.1)
@@ -16,6 +18,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - RAMAnimatedTabBarController
     - Realm
     - RealmSwift
     - SnapKit
@@ -23,12 +26,13 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
+  RAMAnimatedTabBarController: 6863a386e7ae2ab227cd60aa73ab8ff56cdacfdd
   Realm: 869ab2a7e3bdfa6bf06d8723251539f504e6f602
   RealmSwift: f1f51c4a02fe826e5cea623b5441992f06bdc942
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
 
-PODFILE CHECKSUM: 737fde9f76f864ba824b15dc070be5e9aedefa9a
+PODFILE CHECKSUM: 43ff15d75d308d75c712b38b2236d802260dd009
 
 COCOAPODS: 1.11.2
