@@ -10,7 +10,8 @@ import UIKit
 import SnapKit
 
 class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    private var settingsVM: SettingsVM
+
+    private let settingsVM: SettingsVM
     private let answersTableView = UITableView()
     private let textField = UITextField()
     private let saveButton = UIButton(type: .system)
@@ -19,14 +20,20 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.settingsVM = settingsVM
         super.init(nibName: nil, bundle: nil)
     }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        adjustUI()
+        answersTableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsVM.getAnswers().count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         let index = indexPath.row
@@ -37,6 +44,7 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         return cell
     }
+
     func tableView(_ tableView: UITableView,
                    commit editingStylefor: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let index = indexPath.row
@@ -47,6 +55,7 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             answersTableView.reloadData()
         }
     }
+
     @objc private func buttonTapped(_ sender: Any) {
         if let answer = textField.text, !answer.isEmpty {
             var answers = settingsVM.getAnswers()
@@ -57,11 +66,7 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             textField.resignFirstResponder()
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        adjustUI()
-        answersTableView.reloadData()
-    }
+
     private func adjustUI() {
         title = L10n.Settings.title
         view.backgroundColor = .systemBackground
@@ -87,6 +92,7 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             make.width.equalTo(60)
         }
         saveButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+
         view.addSubview(answersTableView)
         answersTableView.snp.makeConstraints { make in
             make.top.equalTo(textField).inset(40)

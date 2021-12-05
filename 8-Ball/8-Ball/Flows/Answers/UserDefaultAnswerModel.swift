@@ -8,11 +8,13 @@
 import Foundation
 
 class UserDefaultAnswerModel {
-    private var dbService: DBService
-    init(dbService: DBService) {
-        self.dbService = dbService
-    }
+
+    private let udService: UDService
     var answerValue: String? {
-        return dbService.getUserAnswers().randomElement()
+        return udService.getUserAnswers().randomElement()
+    }
+
+    init(udService: UDService) {
+        self.udService = udService
     }
 }
