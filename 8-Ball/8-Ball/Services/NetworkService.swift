@@ -11,7 +11,7 @@ protocol NetworkProtocol {
     func fetchResponse(success: @escaping (String) -> Void, failure: @escaping () -> Void)
 }
 
-class Network: NetworkProtocol {
+class NetworkService: NetworkProtocol {
 
     private let urlString: String
     private let urlSession: URLSession
@@ -22,7 +22,6 @@ class Network: NetworkProtocol {
     }
 
     func fetchResponse(success: @escaping (String) -> Void, failure: @escaping () -> Void) {
-
         guard let url = URL(string: self.urlString) else {
             failure()
             return
@@ -44,9 +43,9 @@ class Network: NetworkProtocol {
             do {
                 guard let parsedJsonData = try JSONSerialization.jsonObject(with: data, options: [])
                         as? [String: Any] else {
-                    failure()
-                    return
-                }
+                            failure()
+                            return
+                        }
                 if let magic = parsedJsonData["magic"] as? [String: Any],
                    let answer = magic["answer"] as? String {
                     success(answer)

@@ -5,5 +5,7 @@ target '8-Ball' do
 pod 'SwiftLint', '~> 0.45'
 pod 'SwiftGen', '~> 6.1'
 pod 'SnapKit'
+pod 'RealmSwift', '~>10'
+pod 'RAMAnimatedTabBarController'
 
 end

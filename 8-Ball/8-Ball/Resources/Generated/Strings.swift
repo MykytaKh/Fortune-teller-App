@@ -11,10 +11,29 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
+  internal enum Answer {
+    /// Magic Ball
+    internal static let title = L10n.tr("Localizable", "answer.title")
+  }
+
+  internal enum AnswersHistory {
+    /// Answers History
+    internal static let title = L10n.tr("Localizable", "answersHistory.title")
+  }
+
+  internal enum Ball {
+    /// bitcoinsign.circle.fill
+    internal static let image = L10n.tr("Localizable", "ball.image")
+  }
+
   internal enum Cancel {
     internal enum Error {
       /// Ups! Try again later!
       internal static let title = L10n.tr("Localizable", "cancel.error.title")
+      internal enum NoAnswers {
+        /// Add some answers by yourself!
+        internal static let title = L10n.tr("Localizable", "cancel.error.noAnswers.title")
+      }
     }
   }
 
@@ -24,11 +43,19 @@ internal enum L10n {
   }
 
   internal enum FirstResponse {
-    /// Ask any question and Shake me!
+    /// Ask any question
+    /// and Shake me!
     internal static let title = L10n.tr("Localizable", "firstResponse.title")
   }
 
+  internal enum History {
+    /// externaldrive.fill.badge.timemachine
+    internal static let image = L10n.tr("Localizable", "history.image")
+  }
+
   internal enum Magic {
+    /// Chalkduster
+    internal static let font = L10n.tr("Localizable", "magic.font")
     /// Magic 8 Ball
     internal static let label = L10n.tr("Localizable", "magic.label")
   }
@@ -40,6 +67,11 @@ internal enum L10n {
     }
   }
 
+  internal enum Realm {
+    /// Do-try-catch error!
+    internal static let error = L10n.tr("Localizable", "realm.error")
+  }
+
   internal enum SaveButton {
     /// Save
     internal static let title = L10n.tr("Localizable", "saveButton.title")
@@ -48,6 +80,8 @@ internal enum L10n {
   internal enum Settings {
     /// gearshape.fill
     internal static let image = L10n.tr("Localizable", "settings.image")
+    /// User Answers
+    internal static let title = L10n.tr("Localizable", "settings.title")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

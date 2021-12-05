@@ -13,21 +13,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let dBService = DBService()
-        let userDefaultAnswerModel = UserDefaultAnswerModel(dbService: dBService)
-        let localDefaultAnswerModel = LocalDefaultAnswerModel()
+        let udService = UDService()
+        let dbService = DBService()
+        let userDefaultAnswerModel = UserDefaultAnswerModel(udService: udService)
         let answerManager = AnswerManager()
+        let answersHistoryModel = AnswersHistoryModel(dbService: dbService)
         let answerModel = AnswerModel(userDefaultAnswerModel: userDefaultAnswerModel,
-                                      localDefaultAnswerModel: localDefaultAnswerModel,
-                                      answerManager: answerManager)
+                                      answerManager: answerManager,
+                                      answersHistoryModel: answersHistoryModel, dbService: dbService)
         let answerVM = AnswerVM(answerModel: answerModel)
         let settingsVM = SettingsVM()
+        let answersHistoryVM = AnswersHistoryVM(answersHistoryModel: answersHistoryModel)
+        let answersHistoryVC = AnswersHistoryVC(answersHistoryVM: answersHistoryVM)
         let settingsVC = SettingsVC(settingsVM: settingsVM)
-        let answerVC = AnswerViewController(answerVM: answerVM, settingsVC: settingsVC)
-        let mainVC = answerVC
-        let navigation = UINavigationController(rootViewController: mainVC)
+        let answerVC = AnswerViewController(answerVM: answerVM)
+        let tabBarController = UITabBarController()
+        let navigationHistory = UINavigationController(rootViewController: answersHistoryVC)
+        let navigationSettings = UINavigationController(rootViewController: settingsVC)
+        answerVC.title = L10n.Answer.title
+        navigationSettings.title = L10n.Settings.title
+        navigationHistory.title = L10n.AnswersHistory.title
+        tabBarController.setViewControllers([answerVC, navigationSettings, navigationHistory], animated: false)
+        guard let items = tabBarController.tabBar.items else {
+            return
+        }
+        let images = [L10n.Ball.image, L10n.Settings.image, L10n.History.image]
+        for index in 0..<items.count {
+            items[index].image = UIImage(systemName: images[index])
+        }
+        tabBarController.modalPresentationStyle = .fullScreen
+        let navigation = UINavigationController(rootViewController: tabBarController)
         window.rootViewController = navigation
         self.window = window
+        if #available(iOS 13.0, *) {
+            window.overrideUserInterfaceStyle = .light
+        }
         window.makeKeyAndVisible()
     }
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -12,13 +12,16 @@ protocol AnswerManagerProtocol {
 }
 
 class AnswerManager: AnswerManagerProtocol {
-    private let networkService: Network
-    init(networkService: Network = Network()) {
+
+    private let networkService: NetworkService
+
+    init(networkService: NetworkService = NetworkService()) {
         self.networkService = networkService
     }
+
     func fetchAnswer(success: @escaping (String) -> Void, failure: @escaping () -> Void) {
         networkService.fetchResponse { answer in
-            success(answer.uppercased())
+            success(answer)
         } failure: {
             failure()
         }
