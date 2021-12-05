@@ -8,18 +8,20 @@
 import Foundation
 
 class AnswersHistoryVM {
+
     private let answersHistoryModel: AnswersHistoryModel
+
     init(answersHistoryModel: AnswersHistoryModel) {
         self.answersHistoryModel = answersHistoryModel
     }
 
-    func getAnswers() -> [ManagedAnswer] {
-        return answersHistoryModel.getAnswers()
+    func fetchAnswers(completion: @escaping ([HistoryAnswerModel]) -> Void) {
+        answersHistoryModel.fetchAnswers { answers in
+            completion(answers)
+        }
     }
-    func addAnswer(answer: String) {
-        answersHistoryModel.addAnswer(answer: answer)
-    }
-    func deleteAnswer(index: Int) {
-        answersHistoryModel.deleteAnswer(index: index)
+
+    func deleteAnswer(_ answer: HistoryAnswerModel) {
+        answersHistoryModel.deleteAnswer(answer)
     }
 }

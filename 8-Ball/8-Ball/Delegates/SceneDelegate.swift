@@ -13,20 +13,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let dBService = DBService()
-        let dataBaseService = DataBaseService()
-        let userDefaultAnswerModel = UserDefaultAnswerModel(dbService: dBService)
+        let udService = UDService()
+        let dbService = DBService()
+        let userDefaultAnswerModel = UserDefaultAnswerModel(udService: udService)
         let answerManager = AnswerManager()
-        let answersHistoryModel = AnswersHistoryModel(dataBaseService: dataBaseService)
+        let answersHistoryModel = AnswersHistoryModel(dbService: dbService)
         let answerModel = AnswerModel(userDefaultAnswerModel: userDefaultAnswerModel,
-                                      answerManager: answerManager, answersHistoryModel: answersHistoryModel)
+                                      answerManager: answerManager,
+                                      answersHistoryModel: answersHistoryModel, dbService: dbService)
         let answerVM = AnswerVM(answerModel: answerModel)
         let settingsVM = SettingsVM()
         let answersHistoryVM = AnswersHistoryVM(answersHistoryModel: answersHistoryModel)
         let answersHistoryVC = AnswersHistoryVC(answersHistoryVM: answersHistoryVM)
         let settingsVC = SettingsVC(settingsVM: settingsVM)
-        let answerVC = AnswerViewController(answerVM: answerVM, settingsVC: settingsVC,
-                                            answersHistoryVC: answersHistoryVC)
+        let answerVC = AnswerViewController(answerVM: answerVM)
         let tabBarController = UITabBarController()
         let navigationHistory = UINavigationController(rootViewController: answersHistoryVC)
         let navigationSettings = UINavigationController(rootViewController: settingsVC)
@@ -45,6 +45,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigation = UINavigationController(rootViewController: tabBarController)
         window.rootViewController = navigation
         self.window = window
+        if #available(iOS 13.0, *) {
+            window.overrideUserInterfaceStyle = .light
+        }
         window.makeKeyAndVisible()
     }
     func sceneDidDisconnect(_ scene: UIScene) {

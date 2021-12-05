@@ -43,7 +43,8 @@ internal enum L10n {
   }
 
   internal enum FirstResponse {
-    /// Ask any question and Shake me!
+    /// Ask any question
+    /// and Shake me!
     internal static let title = L10n.tr("Localizable", "firstResponse.title")
   }
 
@@ -53,6 +54,8 @@ internal enum L10n {
   }
 
   internal enum Magic {
+    /// Chalkduster
+    internal static let font = L10n.tr("Localizable", "magic.font")
     /// Magic 8 Ball
     internal static let label = L10n.tr("Localizable", "magic.label")
   }

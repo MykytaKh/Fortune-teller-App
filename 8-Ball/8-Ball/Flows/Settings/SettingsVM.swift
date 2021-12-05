@@ -8,10 +8,13 @@
 import Foundation
 
 class SettingsVM {
-    let settingsModel = SettingsModel()
+
+    private let settingsModel = SettingsModel()
+
     func getAnswers() -> [String] {
         return settingsModel.getAnswers()
     }
+
     func setAnswers(answers: [String]) {
         settingsModel.setAnswers(value: answers)
     }
