@@ -26,6 +26,10 @@ class AnswerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustUI()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         messageLabel.text = L10n.FirstResponse.title
     }
 
