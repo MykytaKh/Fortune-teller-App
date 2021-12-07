@@ -22,7 +22,7 @@ internal enum L10n {
   }
 
   internal enum Ball {
-    /// bitcoinsign.circle.fill
+    /// record.circle
     internal static let image = L10n.tr("Localizable", "ball.image")
   }
 
@@ -49,7 +49,7 @@ internal enum L10n {
   }
 
   internal enum History {
-    /// externaldrive.fill.badge.timemachine
+    /// book
     internal static let image = L10n.tr("Localizable", "history.image")
   }
 
@@ -82,6 +82,11 @@ internal enum L10n {
     internal static let image = L10n.tr("Localizable", "settings.image")
     /// User Answers
     internal static let title = L10n.tr("Localizable", "settings.title")
+  }
+
+  internal enum Triangle {
+    /// triangle
+    internal static let name = L10n.tr("Localizable", "triangle.name")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

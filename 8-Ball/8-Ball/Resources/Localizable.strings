@@ -5,10 +5,10 @@
   Created by Никита Хламов on 13.11.2021.
   
 */
-// SceneDelegate:
-"ball.image" = "bitcoinsign.circle.fill";
+// TabBar:
+"ball.image" = "record.circle";
 "settings.image" = "gearshape.fill";
-"history.image" = "externaldrive.fill.badge.timemachine";
+"history.image" = "book";
 // Answer:
 "firstResponse.title" = "Ask any question\nand Shake me!";
 "motion.began.title" = "Look into the future";
@@ -18,6 +18,7 @@
 "answer.title" = "Magic Ball";
 "cancel.error.noAnswers.title" = "Add some answers by yourself!";
 "magic.font" = "Chalkduster";
+"triangle.name" = "triangle";
 // Settings:
 "saveButton.title" = "Save";
 "settings.title" = "User Answers";

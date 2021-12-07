@@ -68,7 +68,6 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
 
     private func adjustUI() {
-        title = L10n.Settings.title
         view.backgroundColor = .systemBackground
         view.addSubview(textField)
         textField.snp.makeConstraints { make in
