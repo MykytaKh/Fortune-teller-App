@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
 
 class AnswerModel {
 
@@ -13,6 +15,8 @@ class AnswerModel {
     private let userDefaultAnswerModel: UserDefaultAnswerModel
     private let answersHistoryModel: AnswersHistoryModel
     private let dbService: DBService
+    private let addedSubject = PublishRelay<String>()
+    private let disposeBag = DisposeBag()
 
     init(userDefaultAnswerModel: UserDefaultAnswerModel,
          answerManager: AnswerManager, answersHistoryModel: AnswersHistoryModel, dbService: DBService) {
@@ -22,31 +26,43 @@ class AnswerModel {
         self.dbService = dbService
     }
 
-    func fetchNewValue(onFinish: @escaping (String) -> Void) {
-        answerManager.fetchAnswer { answer in
-            onFinish(answer)
-        } failure: { [weak self] in
-            self?.fetchDefaultAnswer(onFinish: { value in
-                onFinish(value)
-            })
+    func setupSubscribings() {
+        addedSubject.subscribe { event in
+            self.dbService.addAnswer(answerName: event)
         }
+        .disposed(by: disposeBag)
     }
 
-    func fetchDefaultAnswer(onFinish: @escaping (String) -> Void) {
-        if let userAnswer = userDefaultAnswerModel.answerValue {
-            onFinish(userAnswer)
+    func fetchNewValue() -> Observable<String> {
+        answerManager.fetchAnswer()
+    }
+//    func fetchNewValue(onFinish: @escaping (String) -> Void) {
+//        answerManager.fetchAnswer { answer in
+//            onFinish(answer)
+//        } failure: { [weak self] in
+//            self?.fetchDefaultAnswer(onFinish: { value in
+//                onFinish(value)
+//            })
+//        }
+//    }
+    func fetchDefaultAnswer() -> Observable<String> {
+        return Observable.create { observer in
+            if let userAnswer = self.userDefaultAnswerModel.answerValue {
+            observer.onNext(userAnswer)
         } else {
-            answersHistoryModel.fetchRandomValue { value in
+            self.answersHistoryModel.fetchRandomValue { value in
                 if let value = value {
-                    onFinish(value)
+                    observer.onNext(value)
                 } else {
-                    onFinish(L10n.Cancel.Error.NoAnswers.title)
+                    observer.onNext(L10n.Cancel.Error.NoAnswers.title)
                 }
             }
+        }
+            return Disposables.create()
         }
     }
 
     func addAnswer(answer: String) {
-        dbService.addAnswer(answerName: answer)
+        addedSubject.accept(answer)
     }
 }

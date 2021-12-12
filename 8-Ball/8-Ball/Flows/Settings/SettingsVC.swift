@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxRelay
 
 class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -15,6 +18,8 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let answersTableView = UITableView()
     private let textField = UITextField()
     private let saveButton = UIButton(type: .system)
+    private let userAnswerSubject = PublishRelay<String>()
+    private let disposeBag = DisposeBag()
 
     init(settingsVM: SettingsVM) {
         self.settingsVM = settingsVM
@@ -27,6 +32,7 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustUI()
+        setupSubscribings()
         answersTableView.reloadData()
     }
 
@@ -56,15 +62,24 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    @objc private func buttonTapped(_ sender: Any) {
-        if let answer = textField.text, !answer.isEmpty {
-            var answers = settingsVM.getAnswers()
-            answers.append(answer)
-            settingsVM.setAnswers(answers: answers)
-            answersTableView.reloadData()
-            textField.text = ""
-            textField.resignFirstResponder()
-        }
+    func setupSubscribings() {
+        userAnswerSubject.subscribe(onNext: { event in
+            var answers = self.settingsVM.getAnswers()
+            answers.append(event)
+            self.settingsVM.setAnswers(answers: answers)
+            self.answersTableView.reloadData()
+        })
+            .disposed(by: disposeBag)
+
+        saveButton.rx.tap
+            .subscribe(onNext: {
+                if let answer = self.textField.text, !answer.isEmpty {
+                    self.userAnswerSubject.accept(answer)
+                    self.textField.text = ""
+                    self.textField.resignFirstResponder()
+                }
+                })
+            .disposed(by: disposeBag)
     }
 
     private func adjustUI() {
@@ -90,7 +105,6 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             make.height.equalTo(textField)
             make.width.equalTo(60)
         }
-        saveButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
         view.addSubview(answersTableView)
         answersTableView.snp.makeConstraints { make in

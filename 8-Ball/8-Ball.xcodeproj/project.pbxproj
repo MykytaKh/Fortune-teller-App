@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		005DA1D8DA5A43352D02D364 /* Pods_8_Ball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A85663D0016124E663C397 /* Pods_8_Ball.framework */; };
 		6C05E462273A8CCF0040BB0B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05E461273A8CCF0040BB0B /* NetworkService.swift */; };
 		6C05E464273A8F260040BB0B /* AnswerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05E463273A8F260040BB0B /* AnswerManager.swift */; };
 		6C05E466273A8F8A0040BB0B /* UDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05E465273A8F8A0040BB0B /* UDService.swift */; };
@@ -32,7 +33,6 @@
 		6CA30C3227404D1300B6CDE3 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA30C3127404D1300B6CDE3 /* Assets.swift */; };
 		6CAFABB2275D65CF001536FB /* HistoryAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAFABB1275D65CF001536FB /* HistoryAnswerModel.swift */; };
 		6CAFABB4275D7F86001536FB /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAFABB3275D7F86001536FB /* CustomTabBarController.swift */; };
-		DE2471BD6846A82D58211722 /* Pods_8_Ball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A85663D0016124E663C397 /* Pods_8_Ball.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +50,9 @@
 		6C43E4612750DE7D00DFCE75 /* AnswersHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersHistoryModel.swift; sourceTree = "<group>"; };
 		6C43E4632750DE9600DFCE75 /* AnswersHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersHistoryVM.swift; sourceTree = "<group>"; };
 		6C43E4652750DEB500DFCE75 /* AnswersHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersHistoryVC.swift; sourceTree = "<group>"; };
+		6C4647522764C653001066C7 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C4647562764C665001066C7 /* RxRelay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxRelay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C4647592764C66C001066C7 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C48125827551742001D8D05 /* ManagedAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedAnswer.swift; sourceTree = "<group>"; };
 		6C9A9E0F271DCF85007E5DAA /* 8-Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "8-Ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C9A9E12271DCF85007E5DAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE2471BD6846A82D58211722 /* Pods_8_Ball.framework in Frameworks */,
+				005DA1D8DA5A43352D02D364 /* Pods_8_Ball.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +226,9 @@
 		FB5FFDEEFBD74A80ADC05257 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C4647592764C66C001066C7 /* RxSwift.framework */,
+				6C4647562764C665001066C7 /* RxRelay.framework */,
+				6C4647522764C653001066C7 /* RxCocoa.framework */,
 				55A85663D0016124E663C397 /* Pods_8_Ball.framework */,
 			);
 			name = Frameworks;
@@ -561,7 +567,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -589,7 +595,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

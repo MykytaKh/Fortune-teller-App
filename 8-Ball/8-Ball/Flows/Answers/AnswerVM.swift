@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class AnswerVM {
 
@@ -15,10 +16,12 @@ class AnswerVM {
         self.answerModel = answerModel
     }
 
-    func getValue(onFinish: @escaping (String) -> Void) {
-        answerModel.fetchNewValue { answer in
-            onFinish(answer.uppercased())
-        }
+    func setupSubscribings() {
+        answerModel.setupSubscribings()
+    }
+
+    func getValue() -> Observable<String> {
+        answerModel.fetchNewValue().map { $0.uppercased() }
     }
 
     func addAnswer(answer: String) {
