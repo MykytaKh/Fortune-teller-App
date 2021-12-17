@@ -63,20 +63,20 @@ class SettingsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
 
     func setupSubscribings() {
-        userAnswerSubject.subscribe(onNext: { event in
-            var answers = self.settingsVM.getAnswers()
-            answers.append(event)
-            self.settingsVM.setAnswers(answers: answers)
-            self.answersTableView.reloadData()
+        userAnswerSubject.subscribe(onNext: { [weak self] event in
+            var answers = self?.settingsVM.getAnswers()
+            answers!.append(event)
+            self?.settingsVM.setAnswers(answers: answers!)
+            self?.answersTableView.reloadData()
         })
             .disposed(by: disposeBag)
 
         saveButton.rx.tap
-            .subscribe(onNext: {
-                if let answer = self.textField.text, !answer.isEmpty {
-                    self.userAnswerSubject.accept(answer)
-                    self.textField.text = ""
-                    self.textField.resignFirstResponder()
+            .subscribe(onNext: { [weak self] in
+                if let answer = self?.textField.text, !answer.isEmpty {
+                    self?.userAnswerSubject.accept(answer)
+                    self?.textField.text = ""
+                    self?.textField.resignFirstResponder()
                 }
                 })
             .disposed(by: disposeBag)

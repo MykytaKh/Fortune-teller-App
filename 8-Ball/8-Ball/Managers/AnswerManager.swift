@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol AnswerManagerProtocol {
-    func fetchAnswer() -> Observable<String>
+    func fetchAnswer(defaultAnswer: String) -> Observable<String>
 }
 
 class AnswerManager: AnswerManagerProtocol {
@@ -20,7 +20,7 @@ class AnswerManager: AnswerManagerProtocol {
         self.networkService = networkService
     }
 
-    func fetchAnswer() -> Observable<String> {
-        networkService.fetchResponse()
+    func fetchAnswer(defaultAnswer: String) -> Observable<String> {
+        networkService.fetchResponse(defaultAnswer: defaultAnswer)
     }
 }

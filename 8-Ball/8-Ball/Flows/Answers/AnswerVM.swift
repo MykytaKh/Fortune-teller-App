@@ -16,10 +16,6 @@ class AnswerVM {
         self.answerModel = answerModel
     }
 
-    func setupSubscribings() {
-        answerModel.setupSubscribings()
-    }
-
     func getValue() -> Observable<String> {
         answerModel.fetchNewValue().map { $0.uppercased() }
     }

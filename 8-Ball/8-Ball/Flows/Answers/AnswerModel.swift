@@ -24,6 +24,7 @@ class AnswerModel {
         self.userDefaultAnswerModel = userDefaultAnswerModel
         self.answerManager = answerManager
         self.dbService = dbService
+        setupSubscribings()
     }
 
     func setupSubscribings() {
@@ -34,33 +35,45 @@ class AnswerModel {
     }
 
     func fetchNewValue() -> Observable<String> {
-        answerManager.fetchAnswer()
+        answerManager.fetchAnswer(defaultAnswer: fetchDefaultAnswer())
     }
-//    func fetchNewValue(onFinish: @escaping (String) -> Void) {
-//        answerManager.fetchAnswer { answer in
-//            onFinish(answer)
-//        } failure: { [weak self] in
-//            self?.fetchDefaultAnswer(onFinish: { value in
-//                onFinish(value)
-//            })
-//        }
-//    }
-    func fetchDefaultAnswer() -> Observable<String> {
-        return Observable.create { observer in
-            if let userAnswer = self.userDefaultAnswerModel.answerValue {
-            observer.onNext(userAnswer)
+
+    func fetchDefaultAnswer() -> String {
+        if let userAnswer = self.userDefaultAnswerModel.answerValue {
+            return userAnswer
         } else {
             self.answersHistoryModel.fetchRandomValue { value in
                 if let value = value {
-                    observer.onNext(value)
-                } else {
-                    observer.onNext(L10n.Cancel.Error.NoAnswers.title)
+                    value
                 }
             }
         }
-            return Disposables.create()
-        }
+        return L10n.Cancel.Error.NoAnswers.title
     }
+    
+    func fetchDefaultAnswer2() -> String {
+        let dfsdf = PublishRelay<String>()
+               if let userAnswer = self.userDefaultAnswerModel.answerValue {
+                   dfsdf.accept(userAnswer)
+           } else {
+               self.answersHistoryModel.fetchRandomValue { value in
+                   if let value = value {
+                       dfsdf.accept(value)
+                   } else {
+                       dfsdf.accept(L10n.Cancel.Error.NoAnswers.title)
+                   }
+               }
+           }
+        var com = ""
+        dfsdf.subscribe(onNext: { event in
+            com = event
+        })
+            .disposed(by: disposeBag)
+        sleep(3)
+        return com
+           }
+
+
 
     func addAnswer(answer: String) {
         addedSubject.accept(answer)
