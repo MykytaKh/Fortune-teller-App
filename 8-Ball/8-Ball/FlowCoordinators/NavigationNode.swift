@@ -10,7 +10,7 @@ import Foundation
 public protocol NavigationEvent {}
 
 public protocol NavigationEventDrivenInterface {
-    
+
     func raise<T: NavigationEvent>(event: T)
     func addHandler<T: NavigationEvent>(_ handler: @escaping (T) -> Void)
 }
@@ -26,12 +26,12 @@ public class NavigationNode: NavigationEventDrivenInterface {
         /// Determine whether events throtteling should be applied
         /// same events will be throtteled with respect to `throttlingThreshold`
         static let shouldThrottleEvents = true
-
+        
         /// Determines throtteling threshold
         /// e.g. how "often" an event can be raised
         static let throttlingThreshold: TimeInterval = 1
     }
-
+    
     private let parent: NavigationNode?
     private let children = NSHashTable<NavigationNode>.weakObjects()
     private var eventHandlerContainers: [String: EventHandleable] = [:]
@@ -52,7 +52,7 @@ public class NavigationNode: NavigationEventDrivenInterface {
             container.add(handler: handler)
         }
     }
-
+    
     public func dump() {
         var rootNode = self
         while rootNode.parent != nil {
@@ -60,7 +60,7 @@ public class NavigationNode: NavigationEventDrivenInterface {
         }
         dump(rootNode, 0)
     }
-
+    
     public func raise<T: NavigationEvent>(event: T) {
         // because we're using event for routing only
         // it could be dispatched directly to the main queue
@@ -106,9 +106,7 @@ public class NavigationNode: NavigationEventDrivenInterface {
 
     private func dump(_ node: NavigationNode, _ level: Int) {
         let indent = String(repeating: "-", count: level + 1)
-        let events = node.eventHandlerContainers.isEmpty ? "" :
-        "[\(node.eventHandlerContainers.keys.joined(separator: ", "))]"
-        Logger.verbose("\(indent) \(node) \(events)")
+        let events = node.eventHandlerContainers.isEmpty ? "" : "[\(node.eventHandlerContainers.keys.joined(separator: ", "))]"
         node.children.objectEnumerator()
             .compactMap { value in value as? NavigationNode }
             .sorted { lhs, rhs -> Bool in lhs.children.count < rhs.children.count }
@@ -127,7 +125,7 @@ private class EventHandlersContainer<T>: EventHandleable {
     func add(handler: @escaping (T) -> Void) {
         handlers.append(handler)
     }
-
+    
     func propagate(event: T) {
         guard NavigationNode.Configuration.shouldThrottleEvents else {
             handlers.forEach { $0(event) }
@@ -145,82 +143,5 @@ private class EventHandlersContainer<T>: EventHandleable {
         lastOpenedEventDescription = currentEventDescription
 
         handlers.forEach { $0(event) }
-    }
-}
-
-enum LogLevel: Int {
-
-    case test, verbose, success, warn, fail
-
-    func glyph() -> String {
-        switch self {
-        case .test: return "💜"
-        case .verbose: return "💙"
-        case .success: return "💚"
-        case .warn: return "💛"
-        case .fail: return "💔"
-        }
-    }
-}
-
-public enum Logger {
-
-    static let currentLogLevel = LogLevel.test
-
-    public static func success(_ string: @autoclosure () -> String, file: String = #file, line: Int = #line) {
-        log(.success, string, file: file, line: line)
-    }
-
-    public static func error(_ string: @autoclosure () -> String, file: String = #file, line: Int = #line) {
-        log(.fail, string, file: file, line: line)
-    }
-
-    public static func test(_ string: @autoclosure () -> String, file: String = #file, line: Int = #line) {
-        log(.test, string, file: file, line: line)
-    }
-
-    public static func verbose(_ string: @autoclosure () -> String, file: String = #file, line: Int = #line) {
-        log(.verbose, string, file: file, line: line)
-    }
-
-    public static func warn(_ string: @autoclosure () -> String, file: String = #file, line: Int = #line) {
-        log(.warn, string, file: file, line: line)
-    }
-
-    private static func log(_ level: LogLevel, _ string: () -> String, file: String = #file, line: Int = #line) {
-        #if DEBUG
-            if currentLogLevel.rawValue > level.rawValue {
-                return
-            }
-            let startIndex = file.range(of: "/", options: .backwards)?.upperBound
-            let fileName = file[startIndex!...]
-            print(" \(level.glyph()) [\(NSDate())] \(fileName)(\(line)) | \(string())")
-        #elseif canImport(Firebase)
-            if level.rawValue >= LogLevel.warn.rawValue {
-                let startIndex = file.range(of: "/", options: .backwards)?.upperBound
-                let fileName = file[startIndex!...]
-                Crashlytics.crashlytics().log(" \(level.glyph()) [\(NSDate())] \(fileName)(\(line)) | \(string())")
-            }
-        #endif
-    }
-}
-
-extension Logger {
-
-    public static func error(_ error: Error, file: String = #file, line: Int = #line) {
-        self.error("\(error)", file: file, line: line)
-    }
-
-    public static func warn(_ error: Error, file: String = #file, line: Int = #line) {
-        self.warn("\(error)", file: file, line: line)
-    }
-}
-
-extension Logger {
-
-    static func assert(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) {
-        #if DEBUG
-        Swift.assert(condition(), message(), file: file, line: line)
-        #endif
     }
 }

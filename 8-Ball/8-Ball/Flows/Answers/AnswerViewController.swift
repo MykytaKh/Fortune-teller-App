@@ -61,10 +61,10 @@ class AnswerViewController: UIViewController {
 
         motionSubject
             .filter { $0 == .motionShake }
-            .subscribe { _ in
-                self.animateBall()
-                self.animateTriangle()
-                self.answerVM.getValue()
+            .subscribe { [weak self] _ in
+                self?.animateBall()
+                self?.animateTriangle()
+                self?.answerVM.getValue()
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { [weak self] value in
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
@@ -74,7 +74,7 @@ class AnswerViewController: UIViewController {
                             self?.animateLabel()
                         }
                     })
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: self!.disposeBag)
             }
             .disposed(by: disposeBag)
     }

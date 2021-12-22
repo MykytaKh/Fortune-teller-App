@@ -8,17 +8,31 @@
 import Foundation
 import UIKit
 
-class HistoryCoordinator {
+class HistoryCoordinator: NavigationNode, FlowCoordinator {
 
-    let containerViewController: UIViewController
-    private let navigationController: UINavigationController?
+    weak var containerViewController: UIViewController?
 
-    init(navigationController: UINavigationController?) {
-        self.navigationController = navigationController
-        containerViewController = AnswersHistoryVC(answersHistoryVM: AnswersHistoryVM(answersHistoryModel: AnswersHistoryModel(dbService: DBService())))
+    override init(parent: NavigationNode?) {
+        super.init(parent: parent)
+
+        addHandlers()
     }
 
-    func start() {
-        navigationController?.pushViewController(containerViewController, animated: true)
+    private func addHandlers() {
+
+        let model = AnswersHistoryModel(dbService: DBService())
+        let viewModel = AnswersHistoryVM(answersHistoryModel: model)
+        let controller = AnswersHistoryVC(answersHistoryVM: viewModel)
+
+        containerViewController?.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func createFlow() -> UIViewController {
+
+        let model = AnswersHistoryModel(dbService: DBService())
+        let viewModel = AnswersHistoryVM(answersHistoryModel: model)
+        let controller = AnswersHistoryVC(answersHistoryVM: viewModel)
+
+        return controller
     }
 }

@@ -8,17 +8,31 @@
 import Foundation
 import UIKit
 
-class SettingsCoordinator {
+class SettingsCoordinator: NavigationNode, FlowCoordinator {
 
-    let containerViewController: UIViewController
-    private let navigationController: UINavigationController?
+    weak var containerViewController: UIViewController?
 
-    init(navigationController: UINavigationController?) {
-        self.navigationController = navigationController
-        containerViewController = SettingsVC(settingsVM: SettingsVM())
+    override init(parent: NavigationNode?) {
+        super.init(parent: parent)
+
+        addHandlers()
     }
 
-    func start() {
-        navigationController?.pushViewController(containerViewController, animated: true)
+    private func addHandlers() {
+
+        let model = SettingsModel()
+        let viewModel = SettingsVM(settingsModel: model)
+        let controller = SettingsVC(settingsVM: viewModel)
+
+        containerViewController?.navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func createFlow() -> UIViewController {
+
+        let model = SettingsModel()
+        let viewModel = SettingsVM(settingsModel: model)
+        let controller = SettingsVC(settingsVM: viewModel)
+
+        return controller
     }
 }

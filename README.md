@@ -12,3 +12,4 @@ Conventions
 - You should use MVVM architecture for your flows
 - You should write your UI using Layout and SnapKit in Code
 - You should use RxSwift in project
+- You should use NavigationNode and FlowCoordinator

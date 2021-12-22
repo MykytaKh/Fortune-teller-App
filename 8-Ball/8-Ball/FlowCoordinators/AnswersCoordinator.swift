@@ -8,19 +8,30 @@
 import Foundation
 import UIKit
 
-class AnswersCoordinator {
+class AnswersCoordinator: NavigationNode, FlowCoordinator {
 
-    let containerViewController: UIViewController
-    private let navigationController: UINavigationController?
+    weak var containerViewController: UIViewController?
 
-    init(navigationController: UINavigationController?) {
-        self.navigationController = navigationController
-        containerViewController = AnswerViewController(answerVM: AnswerVM(answerModel:
-                                                                            AnswerModel(userDefaultAnswerModel: UserDefaultAnswerModel(udService: UDService()), answerManager:
-                                                                                            AnswerManager(), answersHistoryModel: AnswersHistoryModel(dbService: DBService()), dbService: DBService())))
+    override init(parent: NavigationNode?) {
+        super.init(parent: parent)
+
+        addHandlers()
     }
 
-    func start() {
-        navigationController?.pushViewController(containerViewController, animated: true)
+    private func addHandlers() {
+
+        let model = AnswerModel(userDefaultAnswerModel: UserDefaultAnswerModel(udService: UDService()), answerManager: AnswerManager(),
+                                answersHistoryModel: AnswersHistoryModel(dbService: DBService()), dbService: DBService())
+        let viewModel = AnswerVM(answerModel: model)
+        let controller = AnswerViewController(answerVM: viewModel)
+        containerViewController?.navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func createFlow() -> UIViewController {
+        let model = AnswerModel(userDefaultAnswerModel: UserDefaultAnswerModel(udService: UDService()), answerManager: AnswerManager(),
+                                answersHistoryModel: AnswersHistoryModel(dbService: DBService()), dbService: DBService())
+        let viewModel = AnswerVM(answerModel: model)
+        let controller = AnswerViewController(answerVM: viewModel)
+        return controller
     }
 }
