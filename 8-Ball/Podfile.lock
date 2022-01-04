@@ -1,17 +1,25 @@
 PODS:
   - RAMAnimatedTabBarController (5.2.0)
-  - Realm (10.19.0):
-    - Realm/Headers (= 10.19.0)
-  - Realm/Headers (10.19.0)
-  - RealmSwift (10.19.0):
-    - Realm (= 10.19.0)
-  - SnapKit (4.2.0)
+  - Realm (10.20.0):
+    - Realm/Headers (= 10.20.0)
+  - Realm/Headers (10.20.0)
+  - RealmSwift (10.20.0):
+    - Realm (= 10.20.0)
+  - RxCocoa (6.2.0):
+    - RxRelay (= 6.2.0)
+    - RxSwift (= 6.2.0)
+  - RxRelay (6.2.0):
+    - RxSwift (= 6.2.0)
+  - RxSwift (6.2.0)
+  - SnapKit (5.0.1)
   - SwiftGen (6.5.1)
-  - SwiftLint (0.45.0)
+  - SwiftLint (0.45.1)
 
 DEPENDENCIES:
   - RAMAnimatedTabBarController
   - RealmSwift (~> 10)
+  - RxCocoa (= 6.2.0)
+  - RxSwift (= 6.2.0)
   - SnapKit
   - SwiftGen (~> 6.1)
   - SwiftLint (~> 0.45)
@@ -21,18 +29,24 @@ SPEC REPOS:
     - RAMAnimatedTabBarController
     - Realm
     - RealmSwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SnapKit
     - SwiftGen
     - SwiftLint
 
 SPEC CHECKSUMS:
   RAMAnimatedTabBarController: 6863a386e7ae2ab227cd60aa73ab8ff56cdacfdd
-  Realm: 869ab2a7e3bdfa6bf06d8723251539f504e6f602
-  RealmSwift: f1f51c4a02fe826e5cea623b5441992f06bdc942
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  Realm: ae32bdc1da7d19c7617e0400201a77acd4a211b9
+  RealmSwift: c95eec6a712924870b2e36c4c081d63ec07e5414
+  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
-  SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
+  SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
 
-PODFILE CHECKSUM: 43ff15d75d308d75c712b38b2236d802260dd009
+PODFILE CHECKSUM: ced98a4f15d51bb1c141afb14dd7b3d8826d46e6
 
 COCOAPODS: 1.11.2

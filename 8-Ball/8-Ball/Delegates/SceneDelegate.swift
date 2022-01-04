@@ -8,35 +8,20 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
     var window: UIWindow?
+    var appNavigator: AppNavigator?
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
-        let udService = UDService()
-        let dbService = DBService()
-        let userDefaultAnswerModel = UserDefaultAnswerModel(udService: udService)
-        let answerManager = AnswerManager()
-        let answersHistoryModel = AnswersHistoryModel(dbService: dbService)
-        let answerModel = AnswerModel(userDefaultAnswerModel: userDefaultAnswerModel,
-                                      answerManager: answerManager,
-                                      answersHistoryModel: answersHistoryModel, dbService: dbService)
-        let answerVM = AnswerVM(answerModel: answerModel)
-        let settingsVM = SettingsVM()
-        let answersHistoryVM = AnswersHistoryVM(answersHistoryModel: answersHistoryModel)
-        let answersHistoryVC = AnswersHistoryVC(answersHistoryVM: answersHistoryVM)
-        let settingsVC = SettingsVC(settingsVM: settingsVM)
-        let answerVC = AnswerViewController(answerVM: answerVM)
-        let customTBC = CustomTabBarController(answerVC: answerVC, settingsVC: settingsVC,
-                                               answersHistoryVC: answersHistoryVC)
-        let navigation = UINavigationController(rootViewController: customTBC)
-        window.rootViewController = navigation
-        self.window = window
-        if #available(iOS 13.0, *) {
-            window.overrideUserInterfaceStyle = .light
-        }
-        window.makeKeyAndVisible()
+
+        window = UIWindow(windowScene: windowScene)
+
+        appNavigator = AppNavigator(window: window!)
+        appNavigator?.startFlow()
     }
+
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

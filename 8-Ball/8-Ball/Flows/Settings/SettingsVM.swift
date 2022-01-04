@@ -9,7 +9,11 @@ import Foundation
 
 class SettingsVM {
 
-    private let settingsModel = SettingsModel()
+    private let settingsModel: SettingsModel
+
+    init(settingsModel: SettingsModel) {
+        self.settingsModel = settingsModel
+    }
 
     func getAnswers() -> [String] {
         return settingsModel.getAnswers()

@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol AnswerManagerProtocol {
-    func fetchAnswer(success: @escaping (String) -> Void, failure: @escaping () -> Void)
+    func fetchAnswer(defaultAnswer: String) -> Observable<String>
 }
 
 class AnswerManager: AnswerManagerProtocol {
@@ -19,11 +20,7 @@ class AnswerManager: AnswerManagerProtocol {
         self.networkService = networkService
     }
 
-    func fetchAnswer(success: @escaping (String) -> Void, failure: @escaping () -> Void) {
-        networkService.fetchResponse { answer in
-            success(answer)
-        } failure: {
-            failure()
-        }
+    func fetchAnswer(defaultAnswer: String) -> Observable<String> {
+        networkService.fetchResponse(defaultAnswer: defaultAnswer)
     }
 }

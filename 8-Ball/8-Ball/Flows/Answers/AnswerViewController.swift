@@ -6,6 +6,9 @@
 //
 import SnapKit
 import UIKit
+import RxSwift
+import RxRelay
+import RxCocoa
 
 class AnswerViewController: UIViewController {
 
@@ -14,6 +17,9 @@ class AnswerViewController: UIViewController {
     private let magicLabel = UILabel()
     private let magicBall = UIImageView()
     private let magicTriangle = UIImageView()
+    private let labelSubject = PublishRelay<String>()
+    private let motionSubject = PublishRelay<UIEvent.EventSubtype>()
+    private let disposeBag = DisposeBag()
 
     init(answerVM: AnswerVM) {
         self.answerVM = answerVM
@@ -26,34 +32,51 @@ class AnswerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustUI()
+        setupSubscribings()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        messageLabel.text = L10n.FirstResponse.title
+        labelSubject.accept(L10n.FirstResponse.title)
     }
 
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        messageLabel.text = L10n.Motion.Began.title
+        labelSubject.accept(L10n.Motion.Began.title)
     }
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            animateBall()
-            animateTriangle()
-            answerVM.getValue { [weak self] value in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self?.messageLabel.text = value
-                    self?.answerVM.addAnswer(answer: value)
-                    self?.stopAnimation()
-                    self?.animateLable()
-                }
-            }
+            motionSubject.accept(.motionShake)
         }
     }
 
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        messageLabel.text = L10n.Cancelled.title
+        labelSubject.accept(L10n.Cancelled.title)
+    }
+
+    private func setupSubscribings() {
+        labelSubject
+            .bind(to: messageLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        motionSubject
+            .filter { $0 == .motionShake }
+            .subscribe { [weak self] _ in
+                self?.animateBall()
+                self?.animateTriangle()
+                self?.answerVM.getValue()
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] value in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                            self?.labelSubject.accept(value)
+                            self?.answerVM.addAnswer(answer: value)
+                            self?.stopAnimation()
+                            self?.animateLabel()
+                        }
+                    })
+                    .disposed(by: self!.disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
 
     private func adjustUI() {
@@ -96,7 +119,7 @@ class AnswerViewController: UIViewController {
         }
     }
 
-   private func animateImages(for name: String) -> [UIImage] {
+    private func animateImages(for name: String) -> [UIImage] {
         var number = 0
         var images = [UIImage]()
         while let image = UIImage(named: "\(name)\(number)") {
@@ -114,7 +137,7 @@ class AnswerViewController: UIViewController {
         magicTriangle.startAnimating()
     }
 
-    private func animateLable() {
+    private func animateLabel() {
         self.messageLabel.isHidden = false
         UIView.animate(withDuration: 6) {
             self.messageLabel.transform = CGAffineTransform(scaleX: 6, y: 6)
