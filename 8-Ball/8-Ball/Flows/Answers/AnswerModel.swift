@@ -20,14 +20,17 @@ class AnswerModel {
 
     init(userDefaultAnswerModel: UserDefaultAnswerModel,
          answerManager: AnswerManager, answersHistoryModel: AnswersHistoryModel, dbService: DBService) {
+
         self.answersHistoryModel = answersHistoryModel
         self.userDefaultAnswerModel = userDefaultAnswerModel
         self.answerManager = answerManager
         self.dbService = dbService
+
         setupSubscribings()
     }
 
     func setupSubscribings() {
+
         addedSubject.subscribe { event in
             self.dbService.addAnswer(answerName: event)
         }
@@ -35,10 +38,12 @@ class AnswerModel {
     }
 
     func fetchNewValue() -> Observable<String> {
+
         answerManager.fetchAnswer(defaultAnswer: fetchDefaultAnswer())
     }
 
     func fetchDefaultAnswer() -> String {
+
         if let userAnswer = self.userDefaultAnswerModel.answerValue {
             return userAnswer
         } else {
@@ -48,34 +53,12 @@ class AnswerModel {
                 }
             }
         }
+
         return L10n.Cancel.Error.NoAnswers.title
     }
-    
-    func fetchDefaultAnswer2() -> String {
-        let dfsdf = PublishRelay<String>()
-               if let userAnswer = self.userDefaultAnswerModel.answerValue {
-                   dfsdf.accept(userAnswer)
-           } else {
-               self.answersHistoryModel.fetchRandomValue { value in
-                   if let value = value {
-                       dfsdf.accept(value)
-                   } else {
-                       dfsdf.accept(L10n.Cancel.Error.NoAnswers.title)
-                   }
-               }
-           }
-        var com = ""
-        dfsdf.subscribe(onNext: { event in
-            com = event
-        })
-            .disposed(by: disposeBag)
-        sleep(3)
-        return com
-           }
-
-
 
     func addAnswer(answer: String) {
+
         addedSubject.accept(answer)
     }
 }
