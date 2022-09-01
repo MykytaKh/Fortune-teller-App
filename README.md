@@ -1,5 +1,5 @@
 # Magic8Ball.
-Application to get answer on any question user asks.
+Application to get an answer to any question user asks.
 
 Conventions
 - You should write project according to SOLID principles
