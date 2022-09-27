@@ -2,7 +2,7 @@
 //  HistoryCoordinator.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 20.12.2021.
+//  Created by Mykyta Khlamov on 20.12.2021.
 //
 
 import Foundation
@@ -14,25 +14,19 @@ class HistoryCoordinator: NavigationNode, FlowCoordinator {
 
     override init(parent: NavigationNode?) {
         super.init(parent: parent)
-
         addHandlers()
     }
 
     private func addHandlers() {
-
-        let model = AnswersHistoryModel(dbService: DBService())
-        let viewModel = AnswersHistoryVM(answersHistoryModel: model)
-        let controller = AnswersHistoryVC(answersHistoryVM: viewModel)
-
-        containerViewController?.navigationController?.pushViewController(controller, animated: true)
+        containerViewController?.navigationController?.pushViewController(createFlow(), animated: true)
     }
     
     func createFlow() -> UIViewController {
-
-        let model = AnswersHistoryModel(dbService: DBService())
-        let viewModel = AnswersHistoryVM(answersHistoryModel: model)
-        let controller = AnswersHistoryVC(answersHistoryVM: viewModel)
-
-        return controller
+        let dbService: DataBaseServiceProtocol = RealmService()
+        let model = AnswersHistoryModel(dbService: dbService)
+        let viewModel = AnswersHistoryViewModel(answersHistoryModel: model)
+        let viewController = AnswersHistoryViewController(answersHistoryVM: viewModel)
+        return viewController
     }
+    
 }

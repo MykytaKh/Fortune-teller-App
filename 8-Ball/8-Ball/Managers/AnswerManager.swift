@@ -2,25 +2,31 @@
 //  AnswerManager.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 09.11.2021.
+//  Created by Mykyta Khlamov on 09.11.2021.
 //
 
 import Foundation
 import RxSwift
 
 protocol AnswerManagerProtocol {
-    func fetchAnswer(defaultAnswer: String) -> Observable<String>
+    func fetchAnswer() -> Observable<String>
 }
 
 class AnswerManager: AnswerManagerProtocol {
 
-    private let networkService: NetworkService
+    private let networkService: NetworkServiceProtocol
+    private let randomAnswerGenerator: RandomAnswerGeneratorProtocol
 
-    init(networkService: NetworkService = NetworkService()) {
+    init(networkService: NetworkServiceProtocol, randomAnswerGenerator: RandomAnswerGeneratorProtocol) {
         self.networkService = networkService
+        self.randomAnswerGenerator = randomAnswerGenerator
     }
 
-    func fetchAnswer(defaultAnswer: String) -> Observable<String> {
-        networkService.fetchResponse(defaultAnswer: defaultAnswer)
+    func fetchAnswer() -> Observable<String> {
+        networkService.fetchResponse(defaultAnswer: getDefaultAnswer())
+    }
+    
+    private func getDefaultAnswer() -> String {
+        randomAnswerGenerator.getRandomAnswer()
     }
 }

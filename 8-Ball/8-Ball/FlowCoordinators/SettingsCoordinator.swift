@@ -2,7 +2,7 @@
 //  SettingsCoordinator.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 20.12.2021.
+//  Created by Mykyta Khlamov on 20.12.2021.
 //
 
 import Foundation
@@ -14,25 +14,19 @@ class SettingsCoordinator: NavigationNode, FlowCoordinator {
 
     override init(parent: NavigationNode?) {
         super.init(parent: parent)
-
         addHandlers()
     }
 
     private func addHandlers() {
-
-        let model = SettingsModel()
-        let viewModel = SettingsVM(settingsModel: model)
-        let controller = SettingsVC(settingsVM: viewModel)
-
-        containerViewController?.navigationController?.pushViewController(controller, animated: true)
+        containerViewController?.navigationController?.pushViewController(createFlow(), animated: true)
     }
 
     func createFlow() -> UIViewController {
-
-        let model = SettingsModel()
-        let viewModel = SettingsVM(settingsModel: model)
-        let controller = SettingsVC(settingsVM: viewModel)
-
-        return controller
+        let uaService: UserAnswersServiceProtocol = UserDefaultsService()
+        let model = SettingsModel(uaService: uaService)
+        let viewModel = SettingsViewModel(settingsModel: model)
+        let viewController = SettingsViewController(settingsViewModel: viewModel)
+        return viewController
     }
+    
 }

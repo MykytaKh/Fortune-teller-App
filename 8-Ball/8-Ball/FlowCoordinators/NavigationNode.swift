@@ -2,7 +2,7 @@
 //  NavigationNode.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 18.12.2021.
+//  Created by Mykyta Khlamov on 18.12.2021.
 //
 
 import Foundation
@@ -112,6 +112,7 @@ public class NavigationNode: NavigationEventDrivenInterface {
             .sorted { lhs, rhs -> Bool in lhs.children.count < rhs.children.count }
             .forEach { dump($0, level + 1) }
     }
+    
 }
 
 private protocol EventHandleable {}
@@ -144,4 +145,5 @@ private class EventHandlersContainer<T>: EventHandleable {
 
         handlers.forEach { $0(event) }
     }
+    
 }

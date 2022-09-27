@@ -1,36 +1,36 @@
 //
-//  SettingVM.swift
+//  SettingsModel.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 16.11.2021.
+//  Created by Mykyta Khlamov on 16.11.2021.
 //
 
 import Foundation
 
 class SettingsModel {
-
-    private let dbService: UDService
-    private var answers: [String]!
-
-    init() {
-        self.dbService = UDService()
-        self.answers = getAnswersFromDB()
+    
+    private let uaService: UserAnswersServiceProtocol
+    
+    init(uaService: UserAnswersServiceProtocol) {
+        self.uaService = uaService
     }
-
-    private func saveToDB(answers: [String]) {
-        dbService.saveUserAnswers(array: answers)
+    
+    func getUserAnswers() -> Set<Answer> {
+        uaService.getUserAnswers()
     }
-
-    private func getAnswersFromDB() -> [String] {
-        return dbService.getUserAnswers()
+    
+    private func setUserAnswers(_ answers: Set<Answer>) {
+        uaService.setUserAnswers(answers)
     }
-
-    func getAnswers() -> [String] {
-        return answers
+    
+    func saveUserAnswers(_ answers: Set<Answer>) {
+        setUserAnswers(answers)
     }
-
-    func setAnswers(value: [String]) {
-        answers = value
-        saveToDB(answers: answers)
+    
+    func deleteUserAnswer(_ answer: Answer) {
+        var answers = getUserAnswers()
+        answers.remove(answer)
+        setUserAnswers(answers)
     }
+    
 }

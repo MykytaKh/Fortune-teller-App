@@ -2,18 +2,16 @@
 //  AppNavigator.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 22.12.2021.
+//  Created by Mykyta Khlamov on 22.12.2021.
 //
 
 import Foundation
 import UIKit
 
 protocol FlowCoordinator {
-
     var containerViewController: UIViewController? { get set }
 
     func createFlow() -> UIViewController
-
 }
 
 final class AppNavigator: NavigationNode {
@@ -22,12 +20,10 @@ final class AppNavigator: NavigationNode {
 
     init(window: UIWindow) {
         self.window = window
-
         super.init(parent: nil)
     }
 
     func startFlow() {
-
         let coordinator = TabBarCoordinator(parent: self)
         let controller = coordinator.createFlow()
 
@@ -39,4 +35,5 @@ final class AppNavigator: NavigationNode {
 
         window.makeKeyAndVisible()
     }
+    
 }

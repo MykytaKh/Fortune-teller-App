@@ -67,11 +67,6 @@ internal enum L10n {
     }
   }
 
-  internal enum Realm {
-    /// Do-try-catch error!
-    internal static let error = L10n.tr("Localizable", "realm.error")
-  }
-
   internal enum SaveButton {
     /// Save
     internal static let title = L10n.tr("Localizable", "saveButton.title")
