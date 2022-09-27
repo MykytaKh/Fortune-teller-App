@@ -1,8 +1,10 @@
 # Magic8Ball.
 Description
+
 Application to get an answer to any question user asks.
 
 Test
+
 To test the application, you need to install CocoaPods.
 
 Conventions
