@@ -2,14 +2,14 @@
   Localizable.strings
   8-Ball
 
-  Created by Никита Хламов on 13.11.2021.
+  Created by Mykyta Khlamov on 13.11.2021.
   
 */
-// TabBar:
+//MARK: TabBar:
 "ball.image" = "record.circle";
 "settings.image" = "gearshape.fill";
 "history.image" = "book";
-// Answer:
+//MARK: Answer:
 "firstResponse.title" = "Ask any question\nand Shake me!";
 "motion.began.title" = "Look into the future";
 "cancel.error.title" = "Ups! Try again later!";
@@ -19,9 +19,8 @@
 "cancel.error.noAnswers.title" = "Add some answers by yourself!";
 "magic.font" = "Chalkduster";
 "triangle.name" = "triangle";
-// Settings:
+//MARK: Settings:
 "saveButton.title" = "Save";
 "settings.title" = "User Answers";
-// AnswersHistory:
+//MARK: History:
 "answersHistory.title" = "Answers History";
-"realm.error" = "Do-try-catch error!";

@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 18.10.2021.
+//  Created by Mykyta Khlamov on 18.10.2021.
 //
 
 import UIKit
@@ -31,4 +31,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
 }

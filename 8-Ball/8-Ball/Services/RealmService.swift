@@ -2,33 +2,39 @@
 //  RealmService.swift
 //  8-Ball
 //
-//  Created by Никита Хламов on 26.11.2021.
+//  Created by Mykyta Khlamov on 26.11.2021.
 //
 
 import Foundation
 import RealmSwift
 
-class DBService {
+protocol DataBaseServiceProtocol {
+    func addAnswer(_ answerValue: String)
+    func deleteAnswer(_ answer: ManagedAnswerProtocol)
+    func fetchAnswers(completion: @escaping ([ManagedAnswerProtocol]) -> Void)
+}
 
-    func addAnswer(answerName: String) {
+class RealmService: DataBaseServiceProtocol {
+    
+    func addAnswer(_ answerValue: String) {
         DispatchQueue.global(qos: .background).async {
             autoreleasepool {
                 let newAnswer = ManagedAnswer()
                 do {
                     let realm = try Realm()
-                    newAnswer.name = answerName
+                    newAnswer.name = answerValue
                     try realm.write {
                         realm.add(newAnswer)
                         realm.refresh()
                     }
                 } catch {
-                    print("Error")
+                    print("Realm Error with adding: \(error)")
                 }
             }
         }
     }
-
-    func deleteAnswer(_ answer: ManagedAnswer) {
+    
+    func deleteAnswer(_ answer: ManagedAnswerProtocol) {
         DispatchQueue.global(qos: .background).async {
             autoreleasepool {
                 do {
@@ -44,13 +50,13 @@ class DBService {
                         })
                     }
                 } catch {
-                    print("Error")
+                    print("Realm Error with deleting: \(error)")
                 }
             }
         }
     }
-
-    func fetchAnswers(completion: @escaping ([ManagedAnswer]) -> Void) {
+    
+    func fetchAnswers(completion: @escaping ([ManagedAnswerProtocol]) -> Void) {
         DispatchQueue.global(qos: .background).async {
             autoreleasepool {
                 do {
@@ -59,10 +65,11 @@ class DBService {
                     let arrayAnswers = Array(realmObjects)
                     completion(arrayAnswers)
                 } catch {
-                    print("Error")
-                    completion([ManagedAnswer]())
+                    print("Realm Error with fetching: \(error)")
+                    completion([ManagedAnswerProtocol]())
                 }
             }
         }
     }
+    
 }
