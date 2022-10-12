@@ -23,7 +23,7 @@ class UserDefaultsService: UserAnswersServiceProtocol {
                 let userAnswers = try decoder.decode(Set<Answer>.self, from: data)
                 return userAnswers
             } catch {
-                print("Unable to decode user answers. (\(error))")
+                print(L10n.Error.UserAnswers.decode + "\(error)")
             }
         }
         return []
@@ -35,7 +35,7 @@ class UserDefaultsService: UserAnswersServiceProtocol {
             let data = try encoder.encode(userAnswers)
             UserDefaults.standard.set(data, forKey: keyToAnswers)
         } catch {
-            print("Unable to encode user answers. (\(error))")
+            print(L10n.Error.UserAnswers.encode + "\(error)")
         }
     }
     

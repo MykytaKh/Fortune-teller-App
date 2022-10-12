@@ -28,7 +28,7 @@ class RealmService: DataBaseServiceProtocol {
                         realm.refresh()
                     }
                 } catch {
-                    print("Realm Error with adding: \(error)")
+                    print(L10n.Error.DataBase.adding + "\(error)")
                 }
             }
         }
@@ -50,7 +50,7 @@ class RealmService: DataBaseServiceProtocol {
                         })
                     }
                 } catch {
-                    print("Realm Error with deleting: \(error)")
+                    print(L10n.Error.DataBase.deleting + "\(error)")
                 }
             }
         }
@@ -65,7 +65,7 @@ class RealmService: DataBaseServiceProtocol {
                     let arrayAnswers = Array(realmObjects)
                     completion(arrayAnswers)
                 } catch {
-                    print("Realm Error with fetching: \(error)")
+                    print(L10n.Error.DataBase.fetching + "\(error)")
                     completion([ManagedAnswerProtocol]())
                 }
             }

@@ -32,7 +32,7 @@ class RandomAnswerGenerator: RandomAnswerGeneratorProtocol {
         } else if let dbAnswer = dbAnswers?.randomElement()?.value {
             return dbAnswer
         }
-        return L10n.Cancel.Error.NoAnswers.title
+        return L10n.NoAnswers.title
     }
     
     private func fetchAnswersFromDB() {

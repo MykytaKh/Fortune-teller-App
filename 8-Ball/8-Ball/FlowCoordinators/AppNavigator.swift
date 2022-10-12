@@ -16,14 +16,15 @@ protocol FlowCoordinator {
 
 final class AppNavigator: NavigationNode {
 
-    private let window: UIWindow
+    private var window: UIWindow?
 
-    init(window: UIWindow) {
+    init(window: UIWindow?) {
         self.window = window
         super.init(parent: nil)
     }
 
     func startFlow() {
+        guard let window = window else { return }
         let coordinator = TabBarCoordinator(parent: self)
         let controller = coordinator.createFlow()
 

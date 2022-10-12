@@ -9,18 +9,25 @@
 "ball.image" = "record.circle";
 "settings.image" = "gearshape.fill";
 "history.image" = "book";
-//MARK: Answer:
+"answer.title" = "Magic Ball";
+"settings.title" = "User Answers";
+"answersHistory.title" = "Answers History";
+
+//MARK: Answers:
 "firstResponse.title" = "Ask any question\nand Shake me!";
 "motion.began.title" = "Look into the future";
-"cancel.error.title" = "Ups! Try again later!";
-"cancelled.title" = "Ups! Try again!";
+"cancelled.title" = "Something went wrong!\nTry again!";
+"noAnswers.title" = "Add some answers by yourself!";
+
+//MARK: Errors:
+"error.dataBase.adding" = "Data base adding error: ";
+"error.dataBase.deleting" = "Data base deleting error: ";
+"error.dataBase.fetching" = "Data base fetching error: ";
+"error.userAnswers.decode" = "Unable to decode user answers. Error: ";
+"error.userAnswers.encode" = "Unable to encode user answers. Error: ";
+
+//MARK: Other:
 "magic.label" = "Magic 8 Ball";
-"answer.title" = "Magic Ball";
-"cancel.error.noAnswers.title" = "Add some answers by yourself!";
 "magic.font" = "Chalkduster";
 "triangle.name" = "triangle";
-//MARK: Settings:
 "saveButton.title" = "Save";
-"settings.title" = "User Answers";
-//MARK: History:
-"answersHistory.title" = "Answers History";
