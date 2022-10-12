@@ -17,6 +17,11 @@ class AnswerViewController: UIViewController {
     private let magicLabel = UILabel()
     private let magicBall = UIImageView()
     private let magicTriangle = UIImageView()
+    private var landscapeConstraints: [Constraint] = []
+    private var portraitConstraints: [Constraint] = []
+    private var isPortrait: Bool {
+        view.bounds.size.height >= view.bounds.size.width
+    }
     private let labelSubject = PublishRelay<String>()
     private let motionSubject = PublishRelay<UIEvent.EventSubtype>()
     private let disposeBag = DisposeBag()
@@ -93,8 +98,9 @@ class AnswerViewController: UIViewController {
         magicLabel.font = UIFont(name: L10n.Magic.font, size: 30)
         view.addSubview(magicLabel)
         magicLabel.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide).inset(5)
             make.centerX.equalToSuperview()
+            portraitConstraints.append(make.top.equalTo(view.safeAreaLayoutGuide).inset(70).priority(isPortrait ? 999 : 1).constraint)
+            landscapeConstraints.append(make.top.equalTo(view.safeAreaLayoutGuide).inset(10).priority(isPortrait ? 1 : 999).constraint)
         }
     }
     
@@ -102,14 +108,14 @@ class AnswerViewController: UIViewController {
         magicBall.image =  UIImage(named: Asset.ball.name)
         view.addSubview(magicBall)
         magicBall.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.top.greaterThanOrEqualTo(magicLabel).offset(45)
-            make.bottom.lessThanOrEqualTo(30)
-            make.leading.greaterThanOrEqualTo(5)
-            make.trailing.lessThanOrEqualTo(5)
-            make.width.equalTo(magicBall.snp.height)
-            make.width.height.equalToSuperview().priority(.high)
-            make.height.lessThanOrEqualTo(view.frame.size.height)
+            make.centerX.equalToSuperview()
+            portraitConstraints.append(make.centerY.equalToSuperview().priority(isPortrait ? 999 : 1).constraint)
+            portraitConstraints.append(make.width.equalToSuperview().inset(10).priority(isPortrait ? 999 : 1).constraint)
+            portraitConstraints.append(make.height.equalTo(magicBall.snp.width).priority(isPortrait ? 999 : 1).constraint)
+            landscapeConstraints.append(make.centerY.equalToSuperview().inset(10).priority(isPortrait ? 1 : 999).constraint)
+            landscapeConstraints.append(make.height.equalToSuperview().inset(60).priority(isPortrait ? 1 : 999).constraint)
+            landscapeConstraints.append(make.width.equalTo(magicBall.snp.height).priority(isPortrait ? 1 : 999).constraint)
+            
         }
     }
     
@@ -117,6 +123,8 @@ class AnswerViewController: UIViewController {
         view.addSubview(magicTriangle)
         magicTriangle.snp.makeConstraints { make in
             make.center.equalTo(magicBall)
+            make.height.equalTo(magicBall).dividedBy(3.3)
+            make.width.equalTo(magicTriangle.snp.height)
         }
     }
     
@@ -127,7 +135,7 @@ class AnswerViewController: UIViewController {
         messageLabel.textAlignment = .center
         view.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(magicBall).inset(30)
+            make.width.equalTo(magicBall).dividedBy(2.1)
             make.center.equalTo(magicBall)
         }
     }
@@ -173,4 +181,17 @@ class AnswerViewController: UIViewController {
         }
     }
     
+    private func refreshLayout() {
+        portraitConstraints.forEach { constraint in
+            constraint.update(priority: isPortrait ? 999 : 1)
+        }
+        landscapeConstraints.forEach { constraint in
+            constraint.update(priority: isPortrait ? 1 : 999)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        refreshLayout()
+    }
 }
