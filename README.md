@@ -1,8 +1,6 @@
 # Magic8Ball.
 Application to get an answer to any question user asks.
 
-[![Video](https://www.example.com/video-thumbnail.png)](https://github.com/MykytaKh/Fortune-teller-App/blob/develop/MagicBallAnimation2.mp4)
-
 Install:
 - To test the application, you need to install CocoaPods.
 
