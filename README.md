@@ -1,7 +1,10 @@
 # Magic8Ball.
 Application to get an answer to any question user asks.
 
-<img src="MagicBallAnimation.mov" width=300>
+<video width="320" height="240" controls>
+  <source src="MagicBallAnimation.mov" type="video/mov">
+  Your browser does not support the video tag.
+</video>
 
 Install:
 - To test the application, you need to install CocoaPods.
