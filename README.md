@@ -1,13 +1,12 @@
 # Magic8Ball.
-Description
-
 Application to get an answer to any question user asks.
 
-Test
+<img src="MagicBallAnimation.mov" width=300>
 
-To test the application, you need to install CocoaPods.
+Install:
+- To test the application, you need to install CocoaPods.
 
-Conventions
+Conventions:
 - You should write the project according to SOLID principles;
 - Нou should follow the POP principles;
 - You should use Swiftlint and Swiftgen in the project;
